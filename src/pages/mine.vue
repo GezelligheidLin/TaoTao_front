@@ -2,7 +2,7 @@
 我的
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "mine"
 }
