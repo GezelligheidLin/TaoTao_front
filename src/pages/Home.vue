@@ -28,7 +28,7 @@
     <van-swipe-item v-for="image in images" :key="image" >
       <div style="height:8em">
       <van-image
-          width="95%"
+          width="90%"
           height="100%"
           :src="image"
           radius="5%"
@@ -38,11 +38,10 @@
   </van-swipe>
 
 
-  <van-grid :border="false" :column-num="5" :gutter="0" square style="margin-top: 10px;--van-grid-item-content-background-color: transparent">
+  <van-grid :border="false" :column-num="5" :gutter="0" square style="width: 90%;margin: 20px auto;--van-grid-item-content-background-color: transparent">
     <van-grid-item>
       <van-image
           :src="typeImages[0]"
-
       />
       <span class="txt">智慧办公</span>
     </van-grid-item>
@@ -163,6 +162,61 @@
     </van-grid>
   </div>
 
+
+  <div class="GuessYouLikeLeft">
+    <div style="font-size: 15px;color: black;font-weight:900;margin-left: 4px;margin-bottom: 10px">猜你喜欢</div>
+    <van-grid :border="false" :column-num="2" style="--van-grid-item-content-background-color: transparent">
+      <van-grid-item>
+        <div class="GuessYouLikeTagsLeft">
+          <van-image
+              src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg"
+              radius="20px"
+              style="margin-top: 20px"
+          />
+          <div style="margin-top: 35px;margin-left: 10px;margin-right: 15px;">{{goods[0].goodsName}}</div>
+          <div style="font-size: 12px;color: gray;margin-top: 2px;margin-left: 10px;margin-right: 15px;">{{goods[0].goodsIntroduction}}</div>
+          <div style="font-size: 19px;color: red;margin-top: 10px;margin-left: 10px;margin-right: 15px;">￥{{goods[0].goodsPrice}}</div>
+        </div>
+      </van-grid-item>
+      <van-grid-item>
+        <div class="GuessYouLikeTagsLeft">
+          <van-image
+              src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg"
+              radius="20px"
+              style="margin-top: 20px"
+          />
+          <div style="margin-top: 35px;margin-left: 10px;margin-right: 15px;">{{goods[1].goodsName}}</div>
+          <div style="font-size: 12px;color: gray;margin-top: 2px;margin-left: 10px;margin-right: 15px;">{{goods[1].goodsIntroduction}}</div>
+          <div style="font-size: 19px;color: red;margin-top: 10px;margin-left: 10px;margin-right: 15px;">￥{{goods[1].goodsPrice}}</div>
+        </div>
+      </van-grid-item>
+      <van-grid-item>
+        <div class="GuessYouLikeTagsLeft">
+          <van-image
+              src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg"
+              radius="20px"
+              style="margin-top: 20px"
+          />
+          <div style="margin-top: 35px;margin-left: 10px;margin-right: 15px;">{{goods[0].goodsName}}</div>
+          <div style="font-size: 12px;color: gray;margin-top: 2px;margin-left: 10px;margin-right: 15px;">{{goods[0].goodsIntroduction}}</div>
+          <div style="font-size: 19px;color: red;margin-top: 10px;margin-left: 10px;margin-right: 15px;">￥{{goods[0].goodsPrice}}</div>
+        </div>
+      </van-grid-item>
+      <van-grid-item>
+        <div class="GuessYouLikeTagsLeft">
+          <van-image
+              src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg"
+              radius="20px"
+              style="margin-top: 20px"
+          />
+          <div style="margin-top: 35px;margin-left: 10px;margin-right: 15px;">{{goods[1].goodsName}}</div>
+          <div style="font-size: 12px;color: gray;margin-top: 2px;margin-left: 10px;margin-right: 15px;">{{goods[1].goodsIntroduction}}</div>
+          <div style="font-size: 19px;color: red;margin-top: 10px;margin-left: 10px;margin-right: 15px;">￥{{goods[1].goodsPrice}}</div>
+        </div>
+      </van-grid-item>
+    </van-grid>
+    <div style="text-align: center;margin-top: 10px;color: gray">去分类里瞧瞧吧</div>
+  </div>
 </template>
 
 
@@ -199,8 +253,19 @@ const typeImages = [
   'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',
   'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg'
 ];
-
-
+/*商品信息描述列表*/
+const goods = [
+  {
+    goodsName:'巴拉巴拉巴拉巴拉巴拉巴拉',
+    goodsIntroduction:'巴拉巴拉巴拉巴拉',
+    goodsPrice:'9999'
+  },
+  {
+    goodsName:'欧拉欧拉欧拉欧拉欧拉欧拉',
+    goodsIntroduction:'欧拉欧拉欧拉欧拉',
+    goodsPrice:'8899'
+  }
+];
 
 /*顶部标签栏右部点击事件*/
 const onClickRight = () => {
@@ -208,6 +273,7 @@ const onClickRight = () => {
   Toast(mood.value[moodCount.value]);
   moodCount.value++;
 }
+
 /*搜索之后的事件*/
 const onSearch = (val:object) => Toast(val);
 /*取消搜索的事件*/
@@ -244,7 +310,7 @@ img {
   width: 55px;
 }
 .recommend {
-  width: 95%;
+  width: 90%;
   height: 22em;
   border-radius: 20px;
   background: white;
@@ -257,10 +323,28 @@ img {
 }
 
 .prefecture {
-  width: 95%;
+  width: 90%;
   height: 385px;
   border-radius: 20px;
   background: white;
   margin: 15px auto auto;
+}
+
+.GuessYouLikeLeft {
+  width: 90%;
+  margin: 20px;
+  height: 740px;
+}
+
+.GuessYouLikeRight {
+  width: 90%;
+  margin: 20px;
+}
+
+.GuessYouLikeTagsLeft {
+  border-radius: 20px;
+  background: white;
+  width: 160px;
+  height: 300px;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
-  leaderboard
+  Details
 </template>
 
 <script lang="ts">
 export default {
-  name: "leaderboard"
+  name: "Details"
 }
 </script>
 
