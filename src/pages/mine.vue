@@ -1,5 +1,5 @@
 <template>
-我的
+  mine
 </template>
 
 <script lang="ts">

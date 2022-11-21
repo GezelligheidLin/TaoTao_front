@@ -1,7 +1,8 @@
 <template>
   <van-nav-bar
       title="淘了个淘"
-      fixed>
+      fixed
+      >
     <template #left>
       <span style="font-size: 15px;color: red" @click="toNotify">♥淘了个淘</span>
     </template>
@@ -25,7 +26,7 @@
 
   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" @change="">
     <van-swipe-item v-for="image in images" :key="image" >
-      <div style="height:15em">
+      <div style="height:8em">
       <van-image
           width="95%"
           height="100%"
@@ -105,23 +106,62 @@
     <van-nav-bar
         right-text="更多 >"
         @click-right=""
-        class="recommendTop">
+        class="recommendTop"
+        style="position: inherit">
       <template #left>
-        <span style="font-size: 15px;color: black;font-weight:900;" @click="toNotify">甄选推荐</span>
+        <span style="font-size: 15px;color: black;font-weight:900;" @click="">甄选推荐</span>
       </template>
     </van-nav-bar>
-    <van-swipe  :autoplay="3000" indicator-color="blue" @change="onChange">
+    <van-swipe  :autoplay="3000"  @change="onChange">
       <van-swipe-item v-for="image in images" :key="image">
         <van-image
             :src="image"
             width="100%"
-            height="19em"
+            height="17em"
         />
       </van-swipe-item>
     </van-swipe>
-    <div style="text-align: center;">{{i}}</div>
+    <div style="text-align: center;">{{recommendPrice}}</div>
   </div>
 
+  <div class="prefecture">
+    <van-nav-bar
+        right-text="更多 >"
+        @click-right=""
+        class="recommendTop"
+        style="position: inherit">
+      <template #left>
+        <span style="font-size: 15px;color: black;font-weight:900;" @click="">xx专区</span>
+      </template>
+    </van-nav-bar>
+    <van-grid :column-num="2" :gutter="0" :border="false" style="margin-top: -16px;background: transparent">
+      <van-grid-item>
+        <van-image
+            :src="typeImages[0]"
+
+        />
+        <span class="txt">智慧办公</span>
+      </van-grid-item>
+      <van-grid-item>
+        <van-image
+            :src="typeImages[1]"
+        />
+        <span class="txt">智能家居</span>
+      </van-grid-item>
+      <van-grid-item>
+        <van-image
+            :src="typeImages[2]"
+        />
+        <span class="txt">华为手机</span>
+      </van-grid-item>
+      <van-grid-item>
+        <van-image
+            :src="typeImages[3]"
+        />
+        <span class="txt">影音娱乐</span>
+      </van-grid-item>
+    </van-grid>
+  </div>
 
 </template>
 
@@ -133,7 +173,17 @@ import { ref } from 'vue';
 
 const value = ref('');
 /*甄选推荐的价钱*/
-const i = ref('￥30');
+const recommendPrice = ref('￥30');
+/*心情标语*/
+const mood = ref([
+    '恭喜你，发现了隐藏彩蛋喔，我喜欢你♥~♥',
+    '是还想听嘛，今天月色真美呢~',
+    '点我三下啦，看来你也喜欢我呢，好巧吖',
+    '就算喜欢我，也不用一直想我吧~',
+    '不点啦，点这么多下很累了吧，看会自己喜欢的淘品吧~'
+]);
+/*心情点击次数*/
+const moodCount = ref(0);
 /*滚动图片url*/
 const images = [
   'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
@@ -153,24 +203,23 @@ const typeImages = [
 
 
 /*顶部标签栏右部点击事件*/
-const onClickRight = () => Toast('按钮');
+const onClickRight = () => {
+  if(moodCount.value>4) moodCount.value=0;
+  Toast(mood.value[moodCount.value]);
+  moodCount.value++;
+}
 /*搜索之后的事件*/
 const onSearch = (val:object) => Toast(val);
 /*取消搜索的事件*/
 const onCancel = () => Toast('取消');
 /*顶部标签栏左部点击事件*/
-const toNotify = () => Notify({
-  message: '自定义位置',
-  position: 'bottom',
-  color: 'black',
-  background: 'transparent',
-});
+const toNotify = () => Toast('淘了个淘,我们可是专业的！');
 /*滚动图片改变时的事件*/
 const onChange = (index:number) => {
-  if(index===0) i.value='￥30';
-  else if(index===1) i.value='￥40';
-  else if(index===2) i.value='￥50';
-  else i.value='￥60';
+  if(index===0) recommendPrice.value='￥30';
+  else if(index===1) recommendPrice.value='￥40';
+  else if(index===2) recommendPrice.value='￥50';
+  else recommendPrice.value='￥60';
   //Toast('当前 Swipe 索引：' + (index+1));
 }
 
@@ -196,14 +245,22 @@ img {
 }
 .recommend {
   width: 95%;
-  height: 24em;
+  height: 22em;
   border-radius: 20px;
   background: white;
-  margin: 15px auto auto;
+  margin: 15px auto;
 }
 .recommendTop {
   --van-nav-bar-text-color: gray;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+
+.prefecture {
+  width: 95%;
+  height: 385px;
+  border-radius: 20px;
+  background: white;
+  margin: 15px auto auto;
 }
 </style>
