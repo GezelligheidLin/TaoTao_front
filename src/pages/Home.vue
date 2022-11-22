@@ -111,7 +111,7 @@
         <span style="font-size: 15px;color: black;font-weight:900;" @click="">甄选推荐</span>
       </template>
     </van-nav-bar>
-    <van-swipe  :autoplay="3000"  @change="onChange">
+    <van-swipe  :autoplay="4800"  @change="onChange">
       <van-swipe-item v-for="image in images" :key="image">
         <van-image
             :src="image"
@@ -222,7 +222,7 @@
 
 
 <script setup lang="ts">
-import {Notify, Toast} from 'vant';
+import {Toast} from 'vant';
 import { ref } from 'vue';
 
 const value = ref('');
@@ -288,6 +288,7 @@ const onChange = (index:number) => {
   else recommendPrice.value='￥60';
   //Toast('当前 Swipe 索引：' + (index+1));
 }
+
 
 </script>
 
