@@ -137,7 +137,6 @@
       <van-grid-item>
         <van-image
             :src="typeImages[0]"
-
         />
         <span class="txt">智慧办公</span>
       </van-grid-item>

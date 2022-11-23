@@ -9,7 +9,10 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanButton: typeof import('vant/es')['Button']
+    VanCard: typeof import('vant/es')['Card']
     VanCell: typeof import('vant/es')['Cell']
+    VanCheckbox: typeof import('vant/es')['Checkbox']
     VanGrid: typeof import('vant/es')['Grid']
     VanGridItem: typeof import('vant/es')['GridItem']
     VanIcon: typeof import('vant/es')['Icon']
@@ -19,10 +22,11 @@ declare module '@vue/runtime-core' {
     VanSearch: typeof import('vant/es')['Search']
     VanSidebar: typeof import('vant/es')['Sidebar']
     VanSidebarItem: typeof import('vant/es')['SidebarItem']
-    VanSkeleton: typeof import('vant/es')['Skeleton']
+    VanSubmitBar: typeof import('vant/es')['SubmitBar']
     VanSwipe: typeof import('vant/es')['Swipe']
     VanSwipeItem: typeof import('vant/es')['SwipeItem']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
+    VanTag: typeof import('vant/es')['Tag']
   }
 }

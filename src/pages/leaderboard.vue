@@ -11,7 +11,7 @@
           finished-text="没有更多了"
           @load="onLoad"
       >
-        <van-cell v-for="(item,index) in merchant" :key="item" >
+        <van-cell v-for="(item,index) in merchant" :key="index" >
           <van-icon name="medal" v-if="index===0" color="gold" size="30px"/>
           <van-icon name="medal" v-if="index===1" color="silver" size="30px"/>
           <van-icon name="medal" v-if="index===2" color="darkGreen" size="30px"/>
@@ -36,6 +36,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import {reactive, ref} from 'vue';
