@@ -8,6 +8,7 @@ import BottomLayout from "./fixedLayout/bottomLayout.vue";
 
 <template>
   <BottomLayout/>
+
 </template>
 
 <style scoped>

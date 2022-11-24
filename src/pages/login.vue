@@ -1,5 +1,5 @@
 <template>
-  Details<!--详情页-->
+login
 </template>
 
 <script setup lang="ts">
