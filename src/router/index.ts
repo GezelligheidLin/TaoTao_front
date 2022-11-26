@@ -46,7 +46,27 @@ const routes: Array<RouteRecordRaw> = [
         path: "/Login",
         name: "Login",
         component: () => import("../pages/login.vue"),
-    }
+    },
+    {
+        path: "/settings",
+        name: "settings",
+        component: () => import("../pages/settings.vue"),
+    },
+    {
+        path: "/updateUser",
+        name: "updateUser",
+        component: () => import("../pages/updateUser.vue"),
+    },
+    {
+        path: "/password",
+        name: "password",
+        component: () => import("../pages/updateUser/password.vue"),
+    },
+    {
+        path: "/phone",
+        name: "phone",
+        component: () => import("../pages/updateUser/phone.vue"),
+    },
 ];
 const router = createRouter({
     history,

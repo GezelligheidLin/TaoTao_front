@@ -1,6 +1,11 @@
 <template>
   <router-view />
-  <van-tabbar v-model="active" @change="onChange" :placeholder="true" :safe-area-inset-bottom="true">
+  <van-tabbar
+      v-if="(route.path!=='/settings')&&(route.path!=='/updateUser')"
+      v-model="active"
+      @change="onChange"
+      :placeholder="true"
+      :safe-area-inset-bottom="true">
     <van-tabbar-item replace to="/Home" icon="home-o" name="home">首页</van-tabbar-item>
     <van-tabbar-item replace to="/Type" icon="apps-o" name="type">分类</van-tabbar-item>
     <van-tabbar-item replace to="/leaderboard" icon="medal-o" name="leaderboard">受欢迎</van-tabbar-item>
