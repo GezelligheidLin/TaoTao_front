@@ -39,7 +39,10 @@
 
 
 <script setup lang="ts">
-import {reactive, ref} from 'vue';
+import {getCurrentInstance, reactive, ref} from 'vue';
+/*调用axios*/
+const currentInstance = getCurrentInstance()
+const { $http }:any = currentInstance?.appContext.config.globalProperties
 /*组件的东西*/
 const loading = ref(false);
 const finished = ref(false);
@@ -50,39 +53,14 @@ const merchant = reactive([{merchantName:'',merchantPhoto:'',fansCount:0}]);
 const onLoad = () => {
   // 异步更新数据
   // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+  /*清空原始数组*/
+  merchant.length = 0;
   setTimeout(() => {
-    /*清空原始数组*/
-    merchant.length = 0;
-    /*push数据到数组*/
-    merchant.push({merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400},
-                  {merchantName: '小李',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount: 200},
-                  {merchantName: '小明',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',fansCount: 300},
-                  {merchantName: '小刚',merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',fansCount: 400}
-    );
-
+    /*axios获取数据并push数据到数组*/
+    $http.get('http://rap2api.taobao.org/app/mock/305438/leaderboard').then((res:any)=>{
+      for(let i=0;i<res.data.merchant.length;i++)
+      merchant.push(res.data.merchant[i])
+    })
 
     // 加载状态结束
     loading.value = false;

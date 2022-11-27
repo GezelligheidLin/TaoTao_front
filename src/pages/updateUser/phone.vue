@@ -24,18 +24,13 @@
         style="--van-field-label-width:58px;--van-field-label-margin-right:60px;height: 40px;width: 70%;margin-bottom: 20px;margin-top: 20px;margin-left: 50px;background: transparent;"
     />
   </div>
-  <van-button plain hairline type="success" round style="width: 230px;position: absolute;top:42%;left: 22%;background: transparent">修改</van-button>
-<!--  <van-area title="标题" :area-list="areaList" />-->
+  <van-button plain hairline type="success" round style="width: 230px;position: absolute;top:42%;left: 22%;background: transparent" @click="clickUpdate">修改</van-button>
 
 </template>
 
 <script setup lang="ts">
 import {reactive, ref} from "vue";
 import {useRoute,useRouter} from "vue-router";
-import {Toast} from "vant";
-/*import { areaList } from '@vant/area-data';*/
-
-
 
 /*路由变量*/
 const route=useRoute();
@@ -43,8 +38,13 @@ const router=useRouter();
 
 const user = reactive({phone:'',userId:''});
 
+
 const jumpUpdateUser = () =>{
-  router.push({name:'updateUser',params:{u:route.params.u}})
+  router.push({name: 'updateUser', params: {u: route.params.u}})
+}
+
+const clickUpdate = () =>{
+
 }
 
 const openPhone = () =>{

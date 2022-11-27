@@ -43,9 +43,11 @@
 
 <script setup lang="ts">
 
-import {reactive, ref} from "vue";
+import {getCurrentInstance, reactive, ref} from "vue";
 import {Toast} from "vant";
-
+/*调用axios*/
+const currentInstance = getCurrentInstance()
+const { $http }:any = currentInstance?.appContext.config.globalProperties
 
 /*定义点击编辑后底部变换状态*/
 const  bottomChecked = ref(false);
@@ -57,6 +59,8 @@ const linPrice = ref('0')
 const commoditys = reactive([{name:'',image:'',cif:'',type:'',price:0.0,num:1,checked}]);
 /*封装商品信息和总价格*/
 const all = reactive({commoditys,price:0});
+
+
 
 
 /*点击事件*/

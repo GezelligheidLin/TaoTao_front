@@ -33,7 +33,7 @@
     <van-divider :style="{background:'#d2d1d1'}"/>
   </div>
   <div style="margin-top: 25px;width: 90%;margin-left: 5%">
-    <van-cell title="生日" :value="date" @click="show = true" style="background: transparent;margin-left: -4%;font-size: 16px;margin-top: -3%;margin-bottom: -3%;width: 108.3%;"/>
+    <van-cell title="生日" :value="userDetails.birthday" @click="show = true" style="background: transparent;margin-left: -4%;font-size: 16px;margin-top: -3%;margin-bottom: -3%;width: 108.3%;"/>
     <van-calendar  v-model:show="show" @confirm="onConfirm"/>
     <van-divider :style="{background:'#d2d1d1'}"/>
   </div>
@@ -45,8 +45,16 @@
   </div>
   <div style="margin-top: 25px;width: 90%;margin-left: 5%">
     <span>当前地区</span>
-    <span v-if="userDetails.address!==''" style="float: right;color: #919191">{{userDetails.address}}</span>
-    <span v-if="userDetails.address===''" style="float: right;color: #919191" >绑定地区 〉</span>
+    <span v-if="userDetails.address!==''" style="float: right;color: #919191" @click="chooseArea">{{userDetails.address}}</span>
+    <span v-if="userDetails.address===''" style="float: right;color: #919191" @click="chooseArea">绑定地区 〉</span>
+    <van-popup v-model:show="showAddrPopup" position="bottom">
+      <van-area
+          title="选择地区"
+          :area-list="areaList"
+          @cancel="showAddrPopup = false"
+          @confirm="confArea"
+      />
+    </van-popup>
     <van-divider :style="{background:'#d2d1d1'}"/>
   </div>
 
@@ -57,28 +65,39 @@
 /*引入路由*/
 import {useRoute,useRouter} from "vue-router";
 import {defineComponent, getCurrentInstance, onMounted, reactive, ref} from "vue";
+import { areaList } from '@vant/area-data';
 
 /*路由变量*/
 const route=useRoute();
 const router=useRouter();
 
 
-
-
-const userDetails = reactive({userId:'',username:'',password:'',profilePhoto:'',isMerchant:false,sex:'未知',birthday:'',phone:'',address:''})
+const userDetails = reactive({userId:'',username:'',password:'',profilePhoto:'',isMerchant:false,sex:'未知',birthday:'设置生日 〉',phone:'',address:''})
 
 const user=reactive(JSON.parse(route.params.u+''));
 
+let showAddrPopup = ref(false);
 
-const date = ref('设置生日 〉');
 const show = ref(false);
 
 const formatDate = (date:any) => `${date.getMonth() + 1}/${date.getDate()}`;
 const onConfirm = (value:any) => {
   show.value = false;
-  date.value = formatDate(value);
-};
+  userDetails.birthday = formatDate(value);
+}
 
+const chooseArea = () =>{
+  showAddrPopup.value=true;
+}
+
+const confArea = (data:any) =>{
+  userDetails.address='';
+  for(let i=0;i<data.length;i++) {
+    if(i<data.length-1) userDetails.address += data[i].name + '-';
+    else userDetails.address += data[i].name;
+  }
+  showAddrPopup.value = false;
+}
 
 const fileList = (file:any) =>{
   userDetails.profilePhoto=file.content

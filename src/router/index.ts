@@ -67,6 +67,16 @@ const routes: Array<RouteRecordRaw> = [
         name: "phone",
         component: () => import("../pages/updateUser/phone.vue"),
     },
+    {
+        path: "/Authentication",
+        name: "Authentication",
+        component: () => import("../pages/Authentication.vue"),
+    },
+    {
+        path: "/Feedback",
+        name: "Feedback",
+        component: () => import("../pages/Feedback.vue"),
+    },
 ];
 const router = createRouter({
     history,

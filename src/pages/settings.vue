@@ -15,15 +15,15 @@
     <div style="width: 100%;font-size: 20px;margin-left: 20px;" @click="jumpUpdateUser">修改个人信息</div>
     <span style="font-size: 30px;color: #a8a6a6;font-weight: 400;position:absolute;right: 10%;top:8.6%;">></span>
     <van-divider style="margin-top: 10px"/>
-    <div style="width: 100%;font-size: 20px;margin-left: 20px;">实名认证</div>
+    <div style="width: 100%;font-size: 20px;margin-left: 20px;" @click="jumpAuthentication">实名认证</div>
     <span style="font-size: 30px;color: #a8a6a6;font-weight: 400;position:absolute;right: 10%;top:15%;">></span>
     <van-divider style="margin-top: 10px"/>
     <div>
-      <div style="width: 100%;font-size: 20px;margin-left: 20px;">意见反馈</div>
-      <span style="font-size: 30px;color: #a8a6a6;font-weight: 400;position:absolute;right: 10%;top:22.3%;">></span>
+      <div style="width: 100%;font-size: 20px;margin-left: 20px;" @click="jumpFeedback">意见反馈</div>
+      <span style="font-size: 30px;color: #a8a6a6;font-weight: 400;position:absolute;right: 10%;top:22.3%;" @click="jumpFeedback">></span>
     </div>
   </div>
-  <p style="text-align: center"><van-button round color="#e5e7e8" style="width: 190px;color: black" text="退出登录"/></p>
+  <p style="text-align: center"><van-button round color="#e5e7e8" style="width: 190px;color: black" text="退出登录" @click="exit"/></p>
 </template>
 
 <script setup lang="ts">
@@ -35,10 +35,31 @@ import {useRoute,useRouter} from "vue-router";
 const route=useRoute();
 const router=useRouter();
 
+const exit = () =>{
+
+  router.push('/mine');
+}
+
 const jumpUpdateUser = () =>{
   let u = route.params.u;
   router.push({
     name:'updateUser',
+    params:{u:u}
+  });
+}
+
+const jumpAuthentication = () =>{
+  let u = route.params.u;
+  router.push({
+    name:'Authentication',
+    params:{u:u}
+  });
+}
+
+const jumpFeedback = () =>{
+  let u = route.params.u;
+  router.push({
+    name:'Feedback',
     params:{u:u}
   });
 }

@@ -1,7 +1,12 @@
 <template>
   <router-view />
   <van-tabbar
-      v-if="(route.path!=='/settings')&&(route.path!=='/updateUser')"
+      v-if="(route.path!=='/settings')&&
+      (route.path!=='/updateUser')&&
+      (route.path!=='/password')&&
+      (route.path!=='/phone')&&
+      (route.path!=='/Authentication')&&
+      (route.path!=='/Feedback')"
       v-model="active"
       @change="onChange"
       :placeholder="true"
