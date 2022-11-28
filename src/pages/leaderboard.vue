@@ -47,7 +47,7 @@ const { $http }:any = currentInstance?.appContext.config.globalProperties
 const loading = ref(false);
 const finished = ref(false);
 /*定义商家数组*/
-const merchant = reactive([{merchantName:'',merchantPhoto:'',fansCount:0}]);
+const merchant = reactive([{merchantId:'',merchantName:'',merchantPhoto:'',fansCount:0}]);
 
 
 const onLoad = () => {
@@ -64,9 +64,8 @@ const onLoad = () => {
 
     // 加载状态结束
     loading.value = false;
-
     // 数据全部加载完成
-    if (merchant.length >= 2) {
+    if (merchant.length >= merchant.length) {
       finished.value = true;
     }
   }, 1000);

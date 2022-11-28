@@ -30,7 +30,7 @@
       <van-image
           width="90%"
           height="100%"
-          :src="image"
+          :src="image.image"
           radius="5%"
       />
       </div>
@@ -212,12 +212,13 @@ const mood = ref([
 const moodCount = ref(0);
 
 /*顶部滚动图片url*/
-const topImageData = ref([
-  'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-  'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-  'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',
-  'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg'
-]);
+const topImageData = reactive([
+  {goodsId:'0',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg'},
+  {goodsId: '1',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg'},
+  {goodsId: '2',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg'},
+  {goodsId: '3',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg'}
+])
+
 /*商品类型数据*/
 const goodsTypeData = reactive([
   {image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',typeName:'智慧办公'},
@@ -233,24 +234,24 @@ const goodsTypeData = reactive([
 ]);
 /*精品商品数据*/
 const boutiqueData = reactive([
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',price:30},
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',price: 40},
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',price: 50},
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',price: 60}
+  {goodsId: '0',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',price:30},
+  {goodsId: '1',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',price: 40},
+  {goodsId: '2',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',price: 50},
+  {goodsId: '3',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',price: 60}
 ]);
 /*专区数据*/
 const prefectureData = reactive([
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',typeName:'智慧办公'},
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',typeName: '智能家居'},
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',typeName: '华为手机'},
-  {image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',typeName: '影音娱乐'}
+  {goodsId: '0',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',typeName:'智慧办公'},
+  {goodsId: '1',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',typeName: '智能家居'},
+  {goodsId: '2',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',typeName: '华为手机'},
+  {goodsId: '3',image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',typeName: '影音娱乐'}
 ]);
 /*猜你喜欢数据*/
 const GuessYouLikeData = reactive([
-  {image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',goodsName: '巴拉巴拉巴拉巴拉巴拉巴拉',goodsIntroduction: '巴拉巴拉巴拉巴拉',price: 9999},
-  {image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',goodsName: '欧拉欧拉欧拉欧拉欧拉欧拉',goodsIntroduction: '欧拉欧拉欧拉欧拉',price: 8899},
-  {image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',goodsName: '巴拉巴拉巴拉巴拉巴拉巴拉',goodsIntroduction: '巴拉巴拉巴拉巴拉',price: 9999},
-  {image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',goodsName: '欧拉欧拉欧拉欧拉欧拉欧拉',goodsIntroduction: '欧拉欧拉欧拉欧拉',price: 8899},
+  {goodsId: '0',image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',goodsName: '巴拉巴拉巴拉巴拉巴拉巴拉',goodsIntroduction: '巴拉巴拉巴拉巴拉',price: 9999},
+  {goodsId: '1',image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',goodsName: '欧拉欧拉欧拉欧拉欧拉欧拉',goodsIntroduction: '欧拉欧拉欧拉欧拉',price: 8899},
+  {goodsId: '2',image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',goodsName: '巴拉巴拉巴拉巴拉巴拉巴拉',goodsIntroduction: '巴拉巴拉巴拉巴拉',price: 9999},
+  {goodsId: '3',image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',goodsName: '欧拉欧拉欧拉欧拉欧拉欧拉',goodsIntroduction: '欧拉欧拉欧拉欧拉',price: 8899},
 ]);
 
 
@@ -278,7 +279,9 @@ const onChange = (index:number) => {
 /*axios渲染数据*/
 const openHome = () =>{
   $http.get('http://rap2api.taobao.org/app/mock/305438/Home').then((res:any)=>{
-    topImageData.value = res.data.topImageData;
+    topImageData.length=0;
+    for(let i=0;i<res.data.topImageData.length;i++)
+    topImageData.push(res.data.topImageData[i]);
 
     goodsTypeData.length=0;
     for(let i=0;i<res.data.goodsTypeData.length;i++)
