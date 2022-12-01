@@ -33,7 +33,7 @@
   <van-submit-bar v-if="bottomChecked===false" :safe-area-inset-bottom="false" :price=parseFloat(linPrice) button-text="提交订单" @submit="onSubmit" style="margin-bottom: 50px">
     <van-checkbox v-model="checked" @click="checkboxChange(commoditys)">全选</van-checkbox>
   </van-submit-bar>
-  <van-submit-bar v-if="bottomChecked===true" button-type="warning"  :safe-area-inset-bottom="false" button-text="删除" @submit="onSubmit" style="margin-bottom: 50px">
+  <van-submit-bar v-if="bottomChecked===true" button-type="warning"  :safe-area-inset-bottom="false" button-text="删除" @submit="deleteCommodity" style="margin-bottom: 50px">
     <van-checkbox v-model="checked" style="position: absolute;left: 16px" @click="checkboxChange(commoditys)">全选</van-checkbox>
   </van-submit-bar>
   <div style="height: 50px"></div>
@@ -56,15 +56,47 @@ const checked = ref(false);
 /*定义零时商品价格并初始化*/
 const linPrice = ref('0')
 /*定义商品数组对象*/
-const commoditys = reactive([{name:'',image:'',cif:'',type:'',price:0.0,num:1,checked}]);
+const commoditys = reactive([
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999.66,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999.6,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
+  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
+  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false}
+]);
 /*封装商品信息和总价格*/
 const all = reactive({commoditys,price:0});
 
-
-
-
-/*点击事件*/
-const onSubmit = () => Toast('点击按钮');
+/*点击提交订单事件axios*/
+const onSubmit = () => {
+  // $http.post('/',all).then((res:any)=>{
+  //
+  // });
+  Toast.success('提交成功');
+};
+/*点击提交删除事件axios*/
+const deleteCommodity = () => {
+  // $http.post('/',all).then((res:any)=>{
+  //   upData();
+  // });
+  Toast.success('删除成功');
+}
 /*点击+按钮后的事件*/
 const numChangeReduce = (c:any) => {
   if(c.num == 1) return;
@@ -91,33 +123,6 @@ const edit = () => {
 /*点击完成后的事件*/
 const finish = () => {
   bottomChecked.value = false;
-};
-/*请求数据并添加*/
-const upData = () => {
-  commoditys.length=0;
-  commoditys.push({name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999.66,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999.6,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false},
-                  {name:'小米',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',cif:'为发烧而生',type:'手机',price:2999,num:1,checked: false},
-                  {name:'华为',image:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',cif:'华为改造世界',type: '手机',price: 5999,num:1,checked: false}
-  )
 };
 /*每个购物车商品后的复选框点击后的事件*/
 const commodityCheckboxChange = (commodity:any) => {
@@ -171,9 +176,14 @@ const linPriceCut = (linPrice:string,all:number) => {
   }
   return linPrice;
 };
-
-/*点入页面自动执行的事件*/
-upData();
+/*axios请求数据并添加*/
+const upData = () => {
+  $http.get('').then((res:any)=>{
+    commoditys.length=0;
+    res.data.data.forEach((i:any)=>commoditys.push(i));
+  })
+};
+// upData();
 
 </script>
 

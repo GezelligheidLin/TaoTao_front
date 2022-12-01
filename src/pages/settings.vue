@@ -10,7 +10,14 @@
       设置
     </div>
   </div>
-  <div style="width: 90%;height: 10.3em;background: white;margin: auto;border-radius: 30px">
+  <div style="margin-top: 10px">
+    <van-cell-group inset>
+      <van-cell title="修改个人信息"  is-link size="large" @click="jumpUpdateUser" style="margin-top: 10px"/>
+      <van-cell title="实名认证"  is-link size="large" @click="jumpAuthentication" style="margin-top: 10px"/>
+      <van-cell title="意见反馈"  is-link size="large" @click="jumpFeedback" style="margin-top: 10px;margin-bottom: 10px"/>
+    </van-cell-group>
+  </div>
+<!--  <div style="width: 90%;height: 10.3em;background: white;margin: auto;border-radius: 30px">
     <div style="height: 10px"/>
     <div style="width: 100%;font-size: 20px;margin-left: 20px;" @click="jumpUpdateUser">修改个人信息</div>
     <span style="font-size: 30px;color: #a8a6a6;font-weight: 400;position:absolute;right: 10%;top:8.6%;">></span>
@@ -22,7 +29,7 @@
       <div style="width: 100%;font-size: 20px;margin-left: 20px;" @click="jumpFeedback">意见反馈</div>
       <span style="font-size: 30px;color: #a8a6a6;font-weight: 400;position:absolute;right: 10%;top:22.3%;" @click="jumpFeedback">></span>
     </div>
-  </div>
+  </div>-->
   <p style="text-align: center"><van-button round color="#e5e7e8" style="width: 190px;color: black" text="退出登录" @click="exit"/></p>
 </template>
 

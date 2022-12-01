@@ -6,7 +6,9 @@
       (route.path!=='/password')&&
       (route.path!=='/phone')&&
       (route.path!=='/Authentication')&&
-      (route.path!=='/Feedback')"
+      (route.path!=='/Feedback')&&
+      (route.path!=='/login')&&
+      (route.path!=='/orderCenter')"
       v-model="active"
       @change="onChange"
       :placeholder="true"

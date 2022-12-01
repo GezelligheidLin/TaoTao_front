@@ -11,18 +11,50 @@
     </div>
   </div>
   <div style="font-size: 27px;color: darkolivegreen;position: absolute;top:8%;left: 37%">实名认证</div>
-  <div style="position: absolute;top:21%;left:15%;font-size: 20px">
-    <span style="">当前账号：</span>
-    <span style="margin-left: 30px;color: gray">{{user.userId}}</span>
+  <div style="margin-top: 80px">
+    <van-form @submit="onSubmit">
+      <van-cell-group inset>
+        <van-cell size="large" title="当前账号："   :label=user.userId />
+        <van-field
+            size="large"
+            v-model="realUser.realName"
+            name="真实姓名"
+            label="真实姓名"
+            placeholder="真实姓名"
+            :rules="[{ required: true, message: '请填写真实姓名' }]"
+        />
+        <van-field
+            size="large"
+            v-model="realUser.cardId"
+            name="身份证号"
+            label="身份证号"
+            placeholder="身份证号"
+            :rules="[{ required: true, message: '请填写身份证号' }]"
+        />
+        <van-field
+            size="large"
+            v-model="realUser.phone"
+            name="手机号"
+            label="手机号"
+            placeholder="手机号"
+            :rules="[{ required: true, message: '请填写手机号' }]"
+        />
+        <van-field
+            size="large"
+            v-model="realUser.address"
+            name="地址"
+            label="地址"
+            placeholder="地址"
+            :rules="[{ required: true, message: '请填写地址' }]"
+        />
+      </van-cell-group>
+      <div style="margin: 16px;margin-top: 20px">
+        <van-button round block type="primary" native-type="submit">
+          认证
+        </van-button>
+      </div>
+    </van-form>
   </div>
-  <div style="position: absolute;top:31%">
-    <van-field v-model="realUser.realName"  colon size="large" label="真实姓名"  style="--van-field-label-width:70px;--van-field-label-margin-right:2px;height: 40px;width: 70%;margin-bottom: 20px;margin-top: 20px;margin-left: 50px;background: transparent;"/>
-    <van-divider :style="{background:'#d2d1d1',width:'242px'}" style="margin-left: 130px;margin-top: -20px"/>
-    <van-field v-model="realUser.cardId" colon size="large" label="身份证号" style="--van-field-label-width:70px;--van-field-label-margin-right:2px;height: 40px;width: 70%;margin-left: 50px;background: transparent;"/>
-    <van-divider :style="{background:'#d2d1d1',width:'242px'}" style="margin-left: 130px;margin-top: -4px"/>
-  </div>
-  <van-button plain hairline type="success" round style="width: 230px;position: absolute;top:49%;left: 22%;background: transparent" @click="clickAuthentication">认证</van-button>
-
 </template>
 
 <script setup lang="ts">
@@ -34,9 +66,13 @@ import {useRoute,useRouter} from "vue-router";
 const route=useRoute();
 const router=useRouter();
 
-const realUser = reactive({userId:'',cardId:'',realName:''});
+const realUser = reactive({userId:'',cardId:'',realName:'',phone:'',address:''});
 
-const user = reactive(JSON.parse(route.params.u+''));
+const user = reactive(JSON.parse(route.params.u+'')._value);
+
+const onSubmit = () => {
+
+}
 
 const jumpAuthentication = () =>{
   router.push({name: 'settings', params: {u: route.params.u}})

@@ -10,7 +10,8 @@
       修改个人信息
     </div>
   </div>
-  <div style="margin-left: 40%;margin-top: 15%">
+
+  <div style="margin-left: 40%;margin-top: 7%">
   <van-uploader  :deletable="false" preview-size="150" :after-read=fileList capture="camera" accept="image/*" >
     <template #default>
       <van-image
@@ -22,31 +23,32 @@
     </template>
   </van-uploader>
   </div>
-  <div style="margin-top: 80px;width: 90%;margin-left: 5%">
-    <span >当前账号</span>
-    <span style="float: right;color: #919191">{{userDetails.userId}}</span>
-    <van-divider :style="{background:'#d2d1d1'}"/>
-  </div>
-  <div style="margin-top: 25px;width: 90%;margin-left: 5%">
-    <span>密码</span>
-    <span style="float: right;color: #919191" @click="jumpUpdatePassword">更改密码 〉</span>
-    <van-divider :style="{background:'#d2d1d1'}"/>
-  </div>
-  <div style="margin-top: 25px;width: 90%;margin-left: 5%">
-    <van-cell title="生日" :value="userDetails.birthday" @click="show = true" style="background: transparent;margin-left: -4%;font-size: 16px;margin-top: -3%;margin-bottom: -3%;width: 108.3%;"/>
-    <van-calendar  v-model:show="show" @confirm="onConfirm"/>
-    <van-divider :style="{background:'#d2d1d1'}"/>
-  </div>
-  <div style="margin-top: 25px;width: 90%;margin-left: 5%">
-    <span>手机号</span>
-    <span v-if="userDetails.phone!==''" style="float: right;color: #919191" @click="jumpUpdatePhone">{{userDetails.phone}}</span>
-    <span v-if="userDetails.phone===''" style="float: right;color: #919191" @click="jumpUpdatePhone">绑定手机号 〉</span>
-    <van-divider :style="{background:'#d2d1d1'}"/>
-  </div>
-  <div style="margin-top: 25px;width: 90%;margin-left: 5%">
-    <span>当前地区</span>
-    <span v-if="userDetails.address!==''" style="float: right;color: #919191" @click="chooseArea">{{userDetails.address}}</span>
-    <span v-if="userDetails.address===''" style="float: right;color: #919191" @click="chooseArea">绑定地区 〉</span>
+  <div style="margin-top: 50px;background: transparent">
+  <van-cell-group inset>
+    <van-cell title="当前账号" :value=userDetails.userId size="large" style="margin-top: 20px"/>
+    <van-cell title="用户名" is-link :value="userDetails.username" size="large" @click="updateUserName" style="margin-top: 20px"/>
+    <van-popup v-model:show="showName" position="bottom">
+      <van-form @submit="onSubmit" style="height: 120px">
+        <van-cell-group inset>
+          <van-field
+              v-model=userDetails.username
+              label="新用户名"
+              name="新用户名"
+              placeholder="新用户名"
+          />
+        </van-cell-group>
+        <div style="margin: 16px;margin-top: 20px">
+          <van-button round block type="primary" native-type="submit">
+            更换用户名
+          </van-button>
+        </div>
+      </van-form>
+    </van-popup>
+    <van-cell title="密码" is-link :value="userDetails.password" size="large" @click="jumpUpdatePassword" style="margin-top: 20px"/>
+    <van-cell title="生日" is-link :value=userDetails.birthday size="large" @click="show = true" style="margin-top: 20px"/>
+    <van-calendar  v-model:show="show" size="large" @confirm="onConfirm" style="margin-top: 20px"/>
+    <van-cell title="手机号" is-link :value="userDetails.phone" size="large" @click="jumpUpdatePhone" style="margin-top: 20px"/>
+    <van-cell  title="当前地区" is-link :value=userDetails.address size="large" @click="chooseArea" style="margin-top: 20px;margin-bottom: 20px"/>
     <van-popup v-model:show="showAddrPopup" position="bottom">
       <van-area
           title="选择地区"
@@ -55,10 +57,8 @@
           @confirm="confArea"
       />
     </van-popup>
-    <van-divider :style="{background:'#d2d1d1'}"/>
+  </van-cell-group>
   </div>
-
-
 </template>
 
 <script setup lang="ts">
@@ -72,18 +72,28 @@ const route=useRoute();
 const router=useRouter();
 
 
-const userDetails = reactive({userId:'',username:'',password:'',profilePhoto:'',isMerchant:false,sex:'未知',birthday:'设置生日 〉',phone:'',address:''})
+const userDetails = reactive({userId:'',username:'',password:'更改密码',profilePhoto:'',isMerchant:false,sex:'未知',birthday:'修改生日',phone:'修改手机号',address:'修改地区'})
 
-const user=reactive(JSON.parse(route.params.u+''));
+const user=reactive(JSON.parse(route.params.u+'')._value);
+
+let showName = ref(false);
 
 let showAddrPopup = ref(false);
 
 const show = ref(false);
 
+const onSubmit = () =>{
+  showName.value = false;
+}
+
 const formatDate = (date:any) => `${date.getMonth() + 1}/${date.getDate()}`;
 const onConfirm = (value:any) => {
   show.value = false;
   userDetails.birthday = formatDate(value);
+}
+
+const updateUserName = () =>{
+  showName.value = true;
 }
 
 const chooseArea = () =>{
@@ -98,6 +108,7 @@ const confArea = (data:any) =>{
   }
   showAddrPopup.value = false;
 }
+
 
 const fileList = (file:any) =>{
   userDetails.profilePhoto=file.content

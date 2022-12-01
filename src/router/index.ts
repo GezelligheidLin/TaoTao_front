@@ -77,6 +77,21 @@ const routes: Array<RouteRecordRaw> = [
         name: "Feedback",
         component: () => import("../pages/Feedback.vue"),
     },
+    {
+        path: "/login",
+        name: "login",
+        component: () => import("../pages/login.vue"),
+    },
+    {
+        path: "/orderCenter",
+        name: "orderCenter",
+        component: () => import("../pages/myOrder/orderCenter.vue"),
+    },
+    // {
+    //     path: "/allOrder",
+    //     name: "allOrder",
+    //     component: () => import("../pages/myOrder/orderPages/allOrder.vue"),
+    // },
 ];
 const router = createRouter({
     history,

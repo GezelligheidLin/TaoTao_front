@@ -12,6 +12,12 @@ export default defineConfig({
       resolvers: [VantResolver()],
     }),],
   server: {
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:81/',	//实际请求地址
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')}
+    }
   },
 })
