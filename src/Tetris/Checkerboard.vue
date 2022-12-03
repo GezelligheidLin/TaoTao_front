@@ -6,13 +6,14 @@
 
 <script setup>
 import CheckerboardItem from "./CheckerboardItem.vue";
+
 const props = defineProps({
-  checkerboardInfo:Array,
+  checkerboardInfo: Array,
 })
 </script>
 
 <style lang="less" scoped>
-.checkerboard{
+.checkerboard {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;

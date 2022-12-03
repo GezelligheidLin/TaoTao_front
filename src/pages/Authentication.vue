@@ -14,7 +14,7 @@
   <div style="margin-top: 80px">
     <van-form @submit="onSubmit">
       <van-cell-group inset>
-        <van-cell size="large" title="当前账号："   :label=user.userId />
+        <van-cell size="large" title="当前账号：" :label=user.userId />
         <van-field
             size="large"
             v-model="realUser.realName"
@@ -60,30 +60,29 @@
 <script setup lang="ts">
 
 import {reactive} from "vue";
-import {useRoute,useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 /*路由变量*/
-const route=useRoute();
-const router=useRouter();
-
-const realUser = reactive({userId:'',cardId:'',realName:'',phone:'',address:''});
-
-const user = reactive(JSON.parse(route.params.u+'')._value);
-
+const route = useRoute();
+const router = useRouter();
+/*定义实名对象*/
+const realUser = reactive({userId: '', cardId: '', realName: '', phone: '', address: ''});
+/*拿出路由传的参数对象*/
+const user = reactive(JSON.parse(route.params.u + '')._value);
+/*点击认证后的事件*/
 const onSubmit = () => {
 
 }
-
-const jumpAuthentication = () =>{
+/*跳转回设置*/
+const jumpAuthentication = () => {
   router.push({name: 'settings', params: {u: route.params.u}})
 }
 
-const clickAuthentication = () =>{
+const clickAuthentication = () => {
 
 }
-
-
-const openAuthentication = () =>{
+/*渲染数据*/
+const openAuthentication = () => {
   realUser.userId = user.userId;
 }
 openAuthentication();

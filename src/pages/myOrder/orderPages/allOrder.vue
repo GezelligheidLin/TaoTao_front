@@ -1,12 +1,11 @@
 <template>
   <van-cell-group inset v-for="(i,index) in 4" :key="index" style="margin-bottom: 20px;margin-top: 10px">
-    <van-cell  value="已完成" >
+    <van-cell value="已完成">
       <template #title>
-        <van-icon name="user-circle-o"  style="margin-right: 5px"/>
+        <van-icon name="user-circle-o" style="margin-right: 5px"/>
         <span class="custom-title">商家</span>
         <van-icon name="guide-o" style="margin-left: 5px"/>
       </template>
-
     </van-cell>
     <van-card
         num="2"
@@ -20,7 +19,7 @@
     <van-cell>
       <template #title>
         <div style="float: left">
-          <van-icon name="user-circle-o"  style="margin-right: 5px"/>
+          <van-icon name="user-circle-o" style="margin-right: 5px"/>
         </div>
         <div style="float: left">
           <div style="">缪凯杰 15005263269</div>

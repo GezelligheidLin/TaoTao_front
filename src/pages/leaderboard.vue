@@ -1,6 +1,7 @@
 <template>
   <div style="padding: 20px;text-align: center;font-size: 25px;font-weight:900;color: indianred">
-    热门淘商！<van-icon name="fire" color="red" />
+    热门淘商！
+    <van-icon name="fire" color="red"/>
   </div>
   <div style="width: 90%;margin: auto;border-radius: 20px;background: white;">
     <div style="height: 15px"></div>
@@ -11,24 +12,24 @@
           finished-text="没有更多了"
           @load="onLoad"
       >
-        <van-cell v-for="(item,index) in merchant" :key="index" >
+        <van-cell v-for="(item,index) in merchant" :key="index">
           <van-icon name="medal" v-if="index===0" color="gold" size="30px"/>
           <van-icon name="medal" v-if="index===1" color="silver" size="30px"/>
           <van-icon name="medal" v-if="index===2" color="darkGreen" size="30px"/>
           <van-grid direction="horizontal" :border="false">
-            <div style="display: flex;align-items: center;">{{index+1}}</div>
+            <div style="display: flex;align-items: center;">{{ index + 1 }}</div>
             <van-grid-item>
               <van-image
-                :src="item.merchantPhoto" radius="100%" width="50px" height="50px"/>
+                  :src="item.merchantPhoto" radius="100%" width="50px" height="50px"/>
             </van-grid-item>
-            <div style="display: flex;align-items: center;">{{item.merchantName}}</div>
+            <div style="display: flex;align-items: center;">{{ item.merchantName }}</div>
             <div v-if="index<=2" style="position: absolute;right: 30px;top:50%;">
               <span style="font-weight:900;font-size: 16px">粉丝数:</span>
-              <span style="font-weight:900;font-size: 22px;color: red">{{item.fansCount}}</span>
+              <span style="font-weight:900;font-size: 22px;color: red">{{ item.fansCount }}</span>
             </div>
             <div v-if="index>2" style="position: absolute;right: 30px;top:25px;">
               <span style="font-weight:600;">粉丝数:</span>
-              <span style="font-weight:900;font-size: 18px;color: red">{{item.fansCount}}</span>
+              <span style="font-weight:900;font-size: 18px;color: red">{{ item.fansCount }}</span>
             </div>
           </van-grid>
         </van-cell>
@@ -42,55 +43,265 @@
 import {getCurrentInstance, reactive, ref} from 'vue';
 /*调用axios*/
 const currentInstance = getCurrentInstance()
-const { $http }:any = currentInstance?.appContext.config.globalProperties
+const {$http}: any = currentInstance?.appContext.config.globalProperties
 /*组件的东西*/
 const loading = ref(false);
 const finished = ref(false);
 /*定义商家数组*/
 const merchant = reactive([
 
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
-  {merchantId:'',merchantName:'',merchantPhoto:'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',fansCount:0},
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
+  {
+    merchantId: '',
+    merchantName: '',
+    merchantPhoto: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    fansCount: 0
+  },
 
 ]);
 
@@ -98,17 +309,17 @@ const merchant = reactive([
 const onLoad = () => {
   // 异步更新数据
   // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-  /*清空原始数组*/
-
   setTimeout(() => {
     /*axios获取数据并push数据到数组*/
-    $http.get('http://rap2api.taobao.org/app/mock/305438/leaderboard').then((res:any)=>{
+    $http.get('http://rap2api.taobao.org/app/mock/305438/leaderboard').then((res: any) => {
       // for(let i=0;i<res.data.data.length;i++) {
       //   merchant[i].merchantId = res.data.data[i].id;
       //   merchant[i].merchantName = res.data.data[i];
       // }
-      merchant.length=0;
-      res.data.merchant.forEach((i:any)=>{merchant.push(i)});
+      merchant.length = 0;
+      res.data.merchant.forEach((i: any) => {
+        merchant.push(i)
+      });
     })
 
     // 加载状态结束

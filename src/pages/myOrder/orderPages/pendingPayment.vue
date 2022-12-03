@@ -1,5 +1,5 @@
 <template>
-待付款
+  待付款
 </template>
 
 <script setup lang="ts">

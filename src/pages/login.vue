@@ -13,21 +13,21 @@
   <van-form @submit="jumpMine" style="margin-top: 30%">
     <van-cell-group inset>
       <van-field
-          v-model="phone"
+          v-model="userLogin.phone"
           required
           label="手机号"
           placeholder="请输入手机号"
           :rules="[{ required: true, message: '请填写手机号' }]"
       />
       <van-field
-          v-model="sms"
+          v-model="userLogin.code"
           center
           clearable
           label="短信验证码"
           placeholder="请输入短信验证码"
       >
         <template #button>
-          <van-button size="small" type="primary">发送验证码</van-button>
+          <van-button size="small" type="primary" @click="sendCode">发送验证码</van-button>
         </template>
       </van-field>
     </van-cell-group>
@@ -41,21 +41,38 @@
 
 <script setup lang="ts">
 /*引入路由*/
-import {useRoute,useRouter} from "vue-router";
-import {ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {getCurrentInstance, reactive} from "vue";
+/*调用axios*/
+const currentInstance = getCurrentInstance()
+const {$http}: any = currentInstance?.appContext.config.globalProperties
 
 /*路由变量*/
-const route=useRoute();
-const router=useRouter();
+const route = useRoute();
+const router = useRouter();
+/*封装登录注册所需的变量*/
+const userLogin = reactive({phone: '', code: ''})
+/*定义token*/
+// const token:any = ref('');
 
-const phone = ref('');
-const sms = ref('');
-
-
-const jumpMine = () =>{
-  router.push('/mine');
+/*点击登录的事件*/
+const jumpMine = () => {
+  $http.post('http://localhost:8082/user/login/', userLogin).then((res: any) => {  //发送axios请求并将登陆对象传递给后端
+    if (res) {
+      sessionStorage.setItem('token', res.data.data)   //将token写入session
+    }
+    // token.value=res.data.data;
+    router.push({
+      name: 'mine'
+    });
+  })
 }
-
+/*发送验证码事件*/
+const sendCode = () => {
+  // console.log(userLogin.phone)
+  /*axios发送请求并将手机传给后端获取验证码*/
+  $http.get('http://localhost:8082/user/code/' + userLogin.phone);
+}
 </script>
 
 <style scoped>

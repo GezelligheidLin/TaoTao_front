@@ -1,19 +1,19 @@
 <template>
   <div class="home">
-    <Checkerboard :checkerboardInfo="checkerboardInfo" />
-    <Hint v-if="isFail" />
+    <Checkerboard :checkerboardInfo="checkerboardInfo"/>
+    <Hint v-if="isFail"/>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-import { watchEffect } from "@vue/runtime-core";
+import {reactive, ref} from "vue";
+import {watchEffect} from "@vue/runtime-core";
 import Checkerboard from "./Checkerboard.vue";
 import Hint from "./Hint.vue";
 
 const i = ref(0);
 const j = ref(0);
-import { defineEmits } from 'vue'
+import {defineEmits} from 'vue'
 
 const emit = defineEmits(["show"])
 //游戏棋盘（作为俄罗斯方块在各个格子上渲染颜色的依据）
@@ -39,7 +39,7 @@ let isShowSquare = ref(false);
 
 //随机选取方块
 const randomSquareType = () => {
-  if(squareTypeIndex>1) {
+  if (squareTypeIndex > 1) {
     squareTypeIndex = -1;
   }
   squareTypeIndex++;
@@ -58,7 +58,7 @@ setCheckerboard();
 //改变棋盘格子颜色
 const changeCheckerboard = ([A, B], color) => {
   for (let i = 0; i < checkerboardInfo.length; i++) {
-    let [x, y, num] = checkerboardInfo[i];
+    let [x, y] = checkerboardInfo[i];
     if (A === x && B === y) {
       checkerboardInfo[i][2] = color;
       break;
@@ -84,9 +84,9 @@ const setSquare = () => {
   moveSquareCoordinate = null;
   randomSquareType();
   switch (squareTypeIndex) {
-    //t
+      //t
     case 0:
-      if(i.value===0) {
+      if (i.value === 0) {
         moveSquareCoordinate = [
           [0, 0],
           [0, 1],
@@ -99,7 +99,7 @@ const setSquare = () => {
           [4, 2],
         ];
       }
-      if(i.value===1){
+      if (i.value === 1) {
         moveSquareCoordinate = [
           [0, 11],
           [0, 12],
@@ -111,11 +111,11 @@ const setSquare = () => {
           [3, 13],
           [4, 13],
         ];
-        i.value=0;
+        i.value = 0;
       }
       break;
 
-    //l
+      //l
     case 1:
       moveSquareCoordinate = [
         [0, 5],
@@ -127,35 +127,32 @@ const setSquare = () => {
       ];
       break;
 
-    //G
+      //G
     case 2:
       moveSquareCoordinate = [
         [0, 9],
         [0, 8],
         [0, 10],
         [0, 11],
-          [1,8],
-          [2,8],
-          [3,8],
-          [4,8],
-          [4,9],
-          [4,10],
-          [4,11],
-          [3,11],
-          [2,10]
+        [1, 8],
+        [2, 8],
+        [3, 8],
+        [4, 8],
+        [4, 9],
+        [4, 10],
+        [4, 11],
+        [3, 11],
+        [2, 10]
       ];
       break;
 
-    //z字型
+      //z字型
   }
 };
 
 //判断是否碰到边界
 const judgeBoundary = (arr) => {
-  if (arr[0] < 0 || arr[0] > 19 || arr[1] < 0 || arr[1] > 15) {
-    return true;
-  }
-  return false;
+  return arr[0] < 0 || arr[0] > 19 || arr[1] < 0 || arr[1] > 15;
 };
 
 //查看方块是否碰到已经存在的方格中
@@ -166,8 +163,8 @@ const judgeStabilitySquareCoordinate = (arr) => {
   }
   for (let index = 0; index < stabilitySquareCoordinate.length; index++) {
     if (
-      stabilitySquareCoordinate[index][0] - 1 === arr[0] &&
-      stabilitySquareCoordinate[index][1] === arr[1]
+        stabilitySquareCoordinate[index][0] - 1 === arr[0] &&
+        stabilitySquareCoordinate[index][1] === arr[1]
     ) {
       return true;
     }
@@ -190,9 +187,9 @@ const score = (arr) => {
   if (num === 16) {
     //删除已经在该数组中凑齐能得分的行数
     for (
-      let index = stabilitySquareCoordinate.length - 1;
-      index > -1;
-      index--
+        let index = stabilitySquareCoordinate.length - 1;
+        index > -1;
+        index--
     ) {
       if (arr[0] === stabilitySquareCoordinate[index][0]) {
         stabilitySquareCoordinate.splice(index, 1);
@@ -216,8 +213,8 @@ const moveSquare = (num) => {
   //移动
   for (let index = 0; index < moveSquareCoordinate.length; index++) {
     switch (num) {
-      //键盘对应数字如下
-      //40:下；37：左；39：右；
+        //键盘对应数字如下
+        //40:下；37：左；39：右；
       case 37:
         moveSquareCoordinate[index][1] = moveSquareCoordinate[index][1] - 1;
         break;
@@ -257,7 +254,6 @@ const moveSquare = (num) => {
 
   //能否触碰到已稳定方块的标杆
   let flag2 = false;
-  let coordinate = [];
   for (let index = 0; index < moveSquareCoordinate.length; index++) {
     if (judgeStabilitySquareCoordinate(moveSquareCoordinate[index])) {
       flag2 = true;
@@ -269,9 +265,9 @@ const moveSquare = (num) => {
     //添加进入不移动的方块坐标数组
     for (let index = 0; index < moveSquareCoordinate.length; index++) {
       stabilitySquareCoordinate.push(moveSquareCoordinate[index]);
-      if (j.value>3) {
+      if (j.value > 3) {
         //输了就跳出循环，不必再给已稳定的方块坐标添加新坐标了
-        emit("show" ,j.value);
+        emit("show", j.value);
         isFail.value = true;
         break;
       }
@@ -700,7 +696,7 @@ watchEffect(() => {
   if (isShowSquare.value === false) {
 
     setSquare();
-    i.value=1;
+    i.value = 1;
     //在重置方块后会渲染一次颜色（这样第一行才能看见）
     for (let index = 0; index < moveSquareCoordinate.length; index++) {
       changeCheckerboard(moveSquareCoordinate[index], 2);

@@ -61,16 +61,17 @@ import {useRoute,useRouter} from "vue-router";
 /*路由变量*/
 const route=useRoute();
 const router=useRouter();
-
+/*定义用户对象*/
 const user = reactive({phone:'',userId:''});
-
+/*定义原电话码*/
 const oldPhone = ref('');
+/*定义旧电话号码*/
 const newPhone = ref('');
-
+/*点击修改后的事件*/
 const onSubmit = () =>{
 
 }
-
+/*跳转回修改个人信息页面*/
 const jumpUpdateUser = () =>{
   router.push({name: 'updateUser', params: {u: route.params.u}})
 }
@@ -78,7 +79,7 @@ const jumpUpdateUser = () =>{
 const clickUpdate = () =>{
 
 }
-
+/*渲染数据*/
 const openPhone = () =>{
   user.userId = route.params.userId+'';
   user.phone = route.params.userPhone+'';

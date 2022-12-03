@@ -5,13 +5,13 @@
 </template>
 
 <script setup>
-const refresh= ()=>{
+const refresh = () => {
 
 }
 </script>
 
 <style lang="less" scoped>
-.hint{
+.hint {
   display: flex;
   justify-content: center;
   margin: 16px 0;

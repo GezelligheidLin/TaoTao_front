@@ -10,10 +10,10 @@
       意见反馈
     </div>
   </div>
-  <van-cell-group inset style="margin-top: 20px" >
+  <van-cell-group inset style="margin-top: 20px">
     <van-field
         size="large"
-        v-model="message"
+        v-model="Opinion"
         rows="2"
         autosize
         label="意见反馈"
@@ -27,21 +27,20 @@
 </template>
 
 <script setup lang="ts">
-
 import {ref} from "vue";
 /*引入路由*/
-import {useRoute,useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 /*路由变量*/
-const route=useRoute();
-const router=useRouter();
+const route = useRoute();
+const router = useRouter();
+/*绑定的意见值*/
+const Opinion = ref('');
 
-const message = ref('');
-
-const jumpFeedback = () =>{
+/*跳转回设置*/
+const jumpFeedback = () => {
   router.push({name: 'settings', params: {u: route.params.u}});
 }
-
 </script>
 
 <style scoped>

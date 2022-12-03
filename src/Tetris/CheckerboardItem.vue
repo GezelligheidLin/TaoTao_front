@@ -1,19 +1,19 @@
 <template>
   <div class="checkerboardItem">
-    
+
   </div>
 </template>
 
 <script setup>
-import { ref, toRefs } from "vue";
-import { watchEffect } from "@vue/runtime-core";
+import {ref, toRefs} from "vue";
+import {watchEffect} from "@vue/runtime-core";
 
 const props = defineProps({
-  checkerboardItemInfo:Array,
+  checkerboardItemInfo: Array,
 });
 let [x, y, num] = toRefs(props.checkerboardItemInfo);
 let color = ref('');
-watchEffect(()=>{
+watchEffect(() => {
   switch (num.value) {
     case 0:
       color.value = 'transparent'
@@ -31,7 +31,7 @@ watchEffect(()=>{
 </script>
 
 <style lang="less" scoped>
-.checkerboardItem{
+.checkerboardItem {
   width: 20px;
   height: 20px;
   border: 1px solid #f2f3f5;
