@@ -13,7 +13,6 @@
       <form action="/" style="margin-left: 30px">
         <van-search
             v-model="value"
-
             placeholder="请输入搜索关键词"
             @search="onSearch"
             @cancel="onCancel"
@@ -140,6 +139,7 @@
             :src="prefectureData[0].image"
             width="160"
             height="90"
+            radius="10px"
         />
         <span class="txt">{{ prefectureData[0].commodityType }}</span>
       </van-grid-item>
@@ -148,6 +148,7 @@
             :src="prefectureData[1].image"
             width="160"
             height="90"
+            radius="10px"
         />
         <span class="txt">{{ prefectureData[1].commodityType }}</span>
       </van-grid-item>
@@ -156,6 +157,7 @@
             :src="prefectureData[2].image"
             width="160"
             height="90"
+            radius="10px"
         />
         <span class="txt">{{ prefectureData[2].commodityType }}</span>
       </van-grid-item>
@@ -164,6 +166,7 @@
             :src="prefectureData[3].image"
             width="160"
             height="90"
+            radius="10px"
         />
         <span class="txt">{{ prefectureData[3].commodityType }}</span>
       </van-grid-item>
@@ -216,13 +219,19 @@ const mood = ref([
 const moodCount = ref(0);
 /*顶部滚动图片url*/
 const topImageData = reactive([
-  {id: '0', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg'},
+  {
+    id: '0', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg'
+  },
   {
     id: '1',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg'
   },
-  {id: '2', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg'},
-  {id: '3', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg'}
+  {
+    id: '2', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg'
+  },
+  {
+    id: '3', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg'
+  }
 ])
 /*商品类型数据*/
 const goodsTypeData = reactive([

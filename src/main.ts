@@ -2,6 +2,7 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import router from "./router";
 import axios from "axios";
+import Store, {key} from "./store"
 
 const app = createApp(App);
 /*定义全局axios变量$http*/
@@ -17,4 +18,4 @@ axios.interceptors.request.use((config: any) => {
     return config
 })
 
-app.use(router).mount('#app');
+app.use(Store,key).use(router).mount('#app');

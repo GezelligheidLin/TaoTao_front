@@ -311,13 +311,9 @@ const onLoad = () => {
   // setTimeout 仅做示例，真实场景中一般为 ajax 请求
   setTimeout(() => {
     /*axios获取数据并push数据到数组*/
-    $http.get('http://rap2api.taobao.org/app/mock/305438/leaderboard').then((res: any) => {
-      // for(let i=0;i<res.data.data.length;i++) {
-      //   merchant[i].merchantId = res.data.data[i].id;
-      //   merchant[i].merchantName = res.data.data[i];
-      // }
+    $http.get('http://localhost:8082/merchant/hotRank').then((res: any) => {
       merchant.length = 0;
-      res.data.merchant.forEach((i: any) => {
+      res.data.data.forEach((i: any) => {
         merchant.push(i)
       });
     })

@@ -8,7 +8,9 @@
       (route.path!=='/Authentication')&&
       (route.path!=='/Feedback')&&
       (route.path!=='/login')&&
-      (route.path!=='/orderCenter')"
+      (route.path!=='/orderCenter')&&
+      (route.path!=='/typeMore')&&
+      (route.path!=='/Details')"
       v-model="active"
       @change="onChange"
       :placeholder="true"

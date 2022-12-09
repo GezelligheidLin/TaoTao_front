@@ -1,5 +1,5 @@
 <template>
-  <div class="mineTop" style="width: 100%;height: 185px;">
+  <div class="mineTop" style="width: 100%;height: 185px;" :style="background()">
     <van-icon name="setting-o" size="2em" color="white" @click="jumpSettings"
               style="float: right;margin-top:6%;margin-right: 7%"/>
     <div style="height: 20px"/>
@@ -84,23 +84,13 @@ const color = ref('linear-gradient(to right top, #fb4372, #fc4264,#fc4359,#f9485
 /*从session中取出token*/
 const token = sessionStorage.getItem('token');
 
+const background = () => {
+  if (user.value.userId !== '') color.value = 'linear-gradient(to right top, #fb4372, #fc4264,#fc4359,#f94851,#f64943,#fc463c)';
+  else color.value = 'transparent';
+  return {background: color.value};
+}
 
-watch(() => user.value.userId, (newValue, oldValue) => {
-  // 因为watch被观察的对象只能是getter/effect函数、ref、active对象或者这些类型是数组
-  // 所以需要将state.count变成getter函数
-  if (user.value.userId !== '') {
-    if (oldValue === '') color.value = "transparent";
-  } else {
-    if (oldValue !== '') color.value = 'linear-gradient(to right top, #fb4372, #fc4264,#fc4359,#f94851,#f64943,#fc463c)';
-  }
-})
 
-/*实时监测用户是否登录，改换样式*/
-setTimeout(() => {
-  console.log(user.value);
-  if (user.value.userId === '') color.value = "transparent";
-  else if (user.value.userId !== '') color.value = 'linear-gradient(to right top, #fb4372, #fc4264,#fc4359,#f94851,#f64943,#fc463c)'
-}, 10)
 /*淘了个淘显示时机事件*/
 const show = (val: any) => {
   if (val == 4) taoShow.value = true;
@@ -127,28 +117,29 @@ const jumpMyOrder = () => {
 /*axios请求数据并赋值加载*/
 const first = () => {
   console.log(token)
-  user.value = {
-    nickName: '竺九',
-    userId: 'mkj2721183250',
-    icon: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    isMerchant: false
-  };
+  // user.value = {
+  //   nickName: '竺九',
+  //   userId: 'mkj2721183250',
+  //   icon: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+  //   isMerchant: false
+  // };
   $http.get('http://localhost:8082/user/me'
   ).then((res: any) => {
-    user.value.userId = res.data.data.userId;
-    user.value.icon = res.data.data.icon;
-    user.value.nickName = res.data.data.nickName;
-    user.value.isMerchant = false;
+    console.log("res===" + res.data)
+    if (res.data.data === undefined) return
+    else {
+      user.value.userId = res.data.data.userId;
+      console.log(user.value.userId);
+      user.value.icon = res.data.data.icon;
+      user.value.nickName = res.data.data.nickName;
+      user.value.isMerchant = false;
+    }
   })
 }
 first();
 </script>
 
 <style scoped>
-.mineTop {
-  background: v-bind("color");
-}
-
 .recommend {
   width: 90%;
   height: 22em;

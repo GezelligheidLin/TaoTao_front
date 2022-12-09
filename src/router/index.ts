@@ -16,12 +16,23 @@ const routes: Array<RouteRecordRaw> = [
         name: "Type",
         component: () => import("../pages/Type.vue"),
         children: [
+
             {
                 path: "Life",
                 name: "Life",
-                component: () => import("../pages/Life.vue")
+                component: () => import("../pages/type/Life.vue")
             }
         ]
+    },
+    {
+        path: "/typeMore",
+        name: "typeMore",
+        component: () => import("../pages/type/typeMore.vue")
+    },
+    {
+        path: "/item",
+        name: "item",
+        component: () => import("../pages/type/item.vue"),
     },
     {
         path: "/shoppingTrolley",

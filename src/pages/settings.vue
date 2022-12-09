@@ -52,7 +52,8 @@ const router = useRouter();
 const exit = () => {
   /*axios发送退出请求*/
   $http.post('http://localhost:8082/user/logout').then((res: any) => {
-    if(res.success) {
+    console.log(res)
+    if(res.data.success) {
       sessionStorage.removeItem("token");//将token从session移除
       router.push('/mine');
     }
