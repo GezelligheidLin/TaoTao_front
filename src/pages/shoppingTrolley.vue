@@ -13,8 +13,8 @@
     <div v-for="(commodity,index) in commoditys" :key="index" style="margin-bottom: 5px">
       <van-card
           :price="commodity.price"
-          :desc="commodity.cif"
-          :title="commodity.name"
+          :desc="commodity.description"
+          :title="commodity.commodityName"
       >
         <template #num>
           <van-checkbox v-model="commodity.checked" @click="commodityCheckboxChange(commodity)"
@@ -24,13 +24,13 @@
           <van-image :src="commodity.image" height="85px" style=""></van-image>
         </template>
         <template #tags>
-          <van-tag plain type="danger">{{ commodity.type }}</van-tag>
+          <van-tag plain type="danger">{{ commodity.commodityType }}</van-tag>
         </template>
         <template #footer>
           <div style="height: 35px;">
             <van-button size="mini" style="width: 30px;height: 30px;" @click="numChangeReduce(commodity)">-</van-button>
             <span
-                style="position: absolute;top:71.8%;right: 12.6%;font-size: 15px;width: 40px;text-align: center;">{{ commodity.num }}</span>
+                style="position: absolute;top:71.8%;right: 12.6%;font-size: 15px;width: 40px;text-align: center;">{{ commodity.quantity }}</span>
             <van-button size="mini" style="width: 30px;height: 30px;margin-left: 40px" @click="numChangeAdd(commodity)">
               +
             </van-button>
@@ -56,6 +56,9 @@
 
 import {getCurrentInstance, reactive, ref} from "vue";
 import {Toast} from "vant";
+import {useStore} from "vuex";
+import {key} from '../store'
+const store = useStore(key)
 /*调用axios*/
 const currentInstance = getCurrentInstance()
 const {$http}: any = currentInstance?.appContext.config.globalProperties
@@ -69,203 +72,14 @@ const linPrice = ref('0')
 /*定义商品数组对象*/
 const commoditys = reactive([
   {
-    name: '小米',
+    commodityName: '小米',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
+    description: '为发烧而生',
+    commodityType: '手机',
     price: 2999.66,
-    num: 1,
+    quantity: 1,
     checked: false
   },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999.6,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
-    cif: '为发烧而生',
-    type: '手机',
-    price: 2999,
-    num: 1,
-    checked: false
-  },
-  {
-    name: '华为',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
-    cif: '华为改造世界',
-    type: '手机',
-    price: 5999,
-    num: 1,
-    checked: false
-  }
 ]);
 /*封装商品信息和总价格*/
 const all = reactive({commoditys, price: 0});
@@ -286,9 +100,9 @@ const deleteCommodity = () => {
 }
 /*点击+按钮后的事件*/
 const numChangeReduce = (c: any) => {
-  if (c.num == 1) return;
+  if (c.quantity == 1) return;
   else {
-    c.num--;
+    c.quantity--;
     if (c.checked === true) {
       all.price = all.price - c.price;
       linPrice.value = linPriceCut(linPrice.value, all.price);
@@ -297,7 +111,7 @@ const numChangeReduce = (c: any) => {
 }
 /*点击-按钮后的事件*/
 const numChangeAdd = (c: any) => {
-  c.num++;
+  c.quantity++;
   if (c.checked === true) {
     all.price += c.price;
     linPrice.value = linPriceCut(linPrice.value, all.price);
@@ -314,10 +128,10 @@ const finish = () => {
 /*每个购物车商品后的复选框点击后的事件*/
 const commodityCheckboxChange = (commodity: any) => {
   if (commodity.checked === true) {
-    all.price += commodity.num * commodity.price;
+    all.price += commodity.quantity * commodity.price;
     linPrice.value = linPriceCut(linPrice.value, all.price);
   } else {
-    all.price = all.price - commodity.num * commodity.price;
+    all.price = all.price - commodity.quantity * commodity.price;
     linPrice.value = linPriceCut(linPrice.value, all.price);
   }
 };
@@ -327,14 +141,14 @@ const checkboxChange = (commoditys: any) => {
     all.price = 0;
     for (let i = 0; i < commoditys.length; i++) {
       commoditys[i].checked = true;
-      all.price += commoditys[i].num * commoditys[i].price;
+      all.price += commoditys[i].quantity * commoditys[i].price;
       all.price = parseFloat(all.price.toFixed(2));
     }
     linPrice.value = linPriceCut(linPrice.value, all.price);
   } else {
     for (let i = 0; i < commoditys.length; i++) {
       commoditys[i].checked = false;
-      linPrice.value = '000'
+      linPrice.value = '000';
       all.price = 0;
     }
   }
@@ -365,12 +179,19 @@ const linPriceCut = (linPrice: string, all: number) => {
 };
 /*axios请求数据并添加*/
 const upData = () => {
-  $http.get('').then((res: any) => {
-    commoditys.length = 0;
-    res.data.data.forEach((i: any) => commoditys.push(i));
+  $http.get('http://localhost:8082/trolley/show/'+store.state.userId).then((res: any) => {
+    console.log(res.data)
+    for (let i=0;i<res.data.data.goods.length;i++){
+      commoditys[i].commodityName=res.data.data.goods[i].commodityName
+      commoditys[i].image=res.data.data.goods[i].image
+      commoditys[i].description=res.data.data.goods[i].description
+      commoditys[i].commodityType=res.data.data.goods[i].commodityType
+      commoditys[i].price=parseInt(res.data.data.goods[i].price)
+      commoditys[i].quantity=res.data.data.goods[i].quantity
+    }
   })
 };
-// upData();
+upData();
 
 </script>
 

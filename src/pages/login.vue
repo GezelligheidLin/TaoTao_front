@@ -43,6 +43,7 @@
 /*引入路由*/
 import {useRoute, useRouter} from "vue-router";
 import {getCurrentInstance, reactive} from "vue";
+import { Notify } from 'vant';
 /*调用axios*/
 const currentInstance = getCurrentInstance()
 const {$http}: any = currentInstance?.appContext.config.globalProperties
@@ -62,16 +63,25 @@ const jumpMine = () => {
       sessionStorage.setItem('token', res.data.data)   //将token写入session
     }
     // token.value=res.data.data;
-    router.push({
-      name: 'mine'
-    });
+    if(res.data.success) {
+      router.push({
+        name: 'mine'
+      });
+    }
   })
 }
 /*发送验证码事件*/
 const sendCode = () => {
   // console.log(userLogin.phone)
   /*axios发送请求并将手机传给后端获取验证码*/
-  $http.get('http://localhost:8082/user/code/' + userLogin.phone);
+  $http.get('http://localhost:8082/user/code/' + userLogin.phone).then((res:any)=>{
+    console.log(res.data)
+    if (res.data.success){
+      Notify({ type: 'success', message: res.data.data });
+    }else {
+      Notify({ type: 'warning', message: res.data.errorMsg });
+    }
+  });
 }
 </script>
 

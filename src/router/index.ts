@@ -99,6 +99,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "orderCenter",
         component: () => import("../pages/myOrder/orderCenter.vue"),
     },
+    {
+        path: "/submitOrder",
+        name: "submitOrder",
+        component: () => import("../pages/myOrder/orderPages/submitOrder.vue"),
+    },
     // {
     //     path: "/allOrder",
     //     name: "allOrder",

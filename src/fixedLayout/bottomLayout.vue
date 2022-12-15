@@ -10,7 +10,8 @@
       (route.path!=='/login')&&
       (route.path!=='/orderCenter')&&
       (route.path!=='/typeMore')&&
-      (route.path!=='/Details')"
+      (route.path!=='/Details')&&
+      (route.path!=='/submitOrder')"
       v-model="active"
       @change="onChange"
       :placeholder="true"
@@ -24,18 +25,34 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref, watch} from 'vue';
 import {Toast} from 'vant';
 /*引入路由*/
 import {useRoute, useRouter} from "vue-router";
-
 /*路由变量*/
 const route = useRoute();
 const router = useRouter();
+
+const name = [
+    "/Home",
+    "/Type",
+    "/leaderboard",
+    "/shoppingTrolley",
+    "/mine"
+]
+
 /*底部导航栏首先指向的位置*/
 const active = ref("home");
 /*底部导航栏发生改变的事件*/
 const onChange = (index: number) => Toast(`标签 ${index}`);
+watch(()=>route.path,(newValue,oldValue)=>{
+  console.log(newValue)
+  name.forEach((i:any)=>{
+    if(newValue===i) active.value=i.replace(/\//g,'').toLowerCase()
+  })
+  console.log(active.value)
+})
+
 /*路由跳转，修复点击去空白页面的bug*/
 const jump = () => {
   router.push('/Type');

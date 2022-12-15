@@ -19,17 +19,17 @@
   </van-nav-bar>
   <div  style="width: 90%;margin: auto">
     <van-tabs v-model:active="active" background="transparent" style="margin-top: 16px">
-      <van-tab v-for="i in 4" :key="i" title="文字" style="">
+      <van-tab :title="store.state.Type" style="">
         <van-card
-            v-for="i in 10"
+            v-for="(i,index) in TypeGoods"
             :key="i"
-            num="2"
-            price="2.00"
-            desc="描述信息"
-            title="商品标题"
-            thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+            num="1"
+            :price="i.price"
+            :desc="i.description"
+            :title="i.commodityName"
+            :thumb="i.image"
             style="border-radius: 15px;margin-top: 10px"
-            @click="jumpDetails"
+            @click="jumpDetails(i)"
         />
       </van-tab>
     </van-tabs>
@@ -39,13 +39,29 @@
 <script setup lang="ts">
 import {useStore} from "vuex";
 import {key} from '../../store'
-import {ref} from "vue";
+import {getCurrentInstance, reactive, ref} from "vue";
 import {Toast} from "vant";
-import router from "../../router";
+import {useRoute, useRouter} from "vue-router";
+/*调用axios*/
+const currentInstance = getCurrentInstance()
+const {$http}: any = currentInstance?.appContext.config.globalProperties
 
+/*路由变量*/
+const route = useRoute();
+const router = useRouter();
 const store = useStore(key)
 
 const value = ref('');
+
+const TypeGoods = reactive([
+    {
+      commodityId:'',
+      commodityName:'',
+      image:'',
+      description:'',
+      price:'',
+    }
+])
 
 const onSearch = () => {
   Toast.success("搜索")
@@ -55,9 +71,20 @@ const onCancel = () => {
   Toast.fail("取消")
 }
 
-const jumpDetails = () => {
+const jumpDetails = (i:any) => {
   router.push('/Details');
+  store.commit("changeHomeLunBoId",i.commodityId)
+  console.log(i.commodityId)
 }
+
+const openTypeMore = () => {
+  $http.get('http://localhost:8082/goodsType/classify/'+store.state.Type).then((res:any)=>{
+    console.log(res.data)
+    TypeGoods.length=0
+    res.data.data.forEach((i:any)=>{TypeGoods.push(i)})
+  })
+}
+openTypeMore()
 
 const log = () => {
   console.log(store.state.Type)

@@ -1,7 +1,7 @@
 <template>
   <div class="left">
     <van-sidebar v-model="active">
-      <van-sidebar-item v-for="(i,index) in type" :key="i" :title="i" @click="jump(index)" style="background: transparent"/>
+      <van-sidebar-item v-for="(i,index) in type" :key="i" :title="i" @click="Type(index)" style="background: transparent"/>
     </van-sidebar>
   </div>
 
@@ -27,14 +27,14 @@
       </van-nav-bar>
 
       <van-grid :column-num="2" :gutter="0" :border="false" style="margin-top: -16px;background: transparent">
-        <van-grid-item v-for="(i,index) in 4" :key="i">
+        <van-grid-item v-for="(i,index) in goods.length" :key="i">
           <van-image
               :src="goods[index].image"
               width="120"
               height="90"
               radius="10px"
           />
-          <span style="color: gray;font-size: 12px;margin-top: 10px">xx</span>
+          <span style="color: gray;font-size: 12px;margin-top: 10px">{{goods[index].commodityName}}</span>
         </van-grid-item>
       </van-grid>
       <div style="height: 20px;border-radius: 20px"></div>
@@ -47,14 +47,20 @@
 
 <!-- js -->
 <script setup lang="ts">
-import {reactive, ref, watch} from 'vue';
+import {getCurrentInstance, reactive, ref, watch} from 'vue';
 import {Notify, Toast} from 'vant';
 import router from '../router';
 import {useStore} from "vuex";
 import {key} from '../store'
+import {$toRef} from "vue/macros";
 const store = useStore(key)
 
-const active = ref(0);
+/*调用axios*/
+const currentInstance = getCurrentInstance()
+const {$http}: any = currentInstance?.appContext.config.globalProperties
+
+
+let active = store.state.HomeTypeIndex;
 const value = ref('');
 
 const count = ref(0)
@@ -79,6 +85,13 @@ const goodsType = reactive([
       {
         commodity_id:'3',
         image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',
+        price : 59,
+        commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
+        data : 18
+      },
+      {
+        commodity_id:'4',
+        image :  'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -384,10 +397,10 @@ const goodsType = reactive([
 
 const goods = reactive([
   {
-    commodity_id:'',
+    commodityId:'',
     image :'',
     price : 0,
-    commodity_name : '',
+    commodityName : '',
     data : 0
   }
 ])
@@ -400,9 +413,9 @@ const type = [
   "文创",
   "美食",
   "装品",
+  '健康',
   "穿搭",
   "运动",
-  '健康'
 ]
 
 const jumpTypeMore = () => {
@@ -410,13 +423,16 @@ const jumpTypeMore = () => {
   router.push('/typeMore');
 }
 
-const jump = (i:any) => {
+const Type = (i:any) => {
   count.value=i;
-  goods.length=0;
-  goodsType[i].goods.forEach((j:any)=>goods.push(j))
-  console.log(goods)
+  $http.get("http://localhost:8082/goodsType/classify/"+type[i]).then((res:any)=>{
+    console.log(res.data)
+    goods.length=0;
+    res.data.data.forEach((j:any)=>goods.push(j))
+    console.log(goods)
+  })
 }
-jump(0);
+Type(store.state.HomeTypeIndex);
 
 
 </script>

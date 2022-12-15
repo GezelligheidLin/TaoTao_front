@@ -1,4 +1,5 @@
 <template>
+
   <div class="mineTop" style="width: 100%;height: 185px;" :style="background()">
     <van-icon name="setting-o" size="2em" color="white" @click="jumpSettings"
               style="float: right;margin-top:6%;margin-right: 7%"/>
@@ -9,10 +10,10 @@
     >
       <template #tags>
         <div style="position: absolute;top:65%;left: -8%">
-          <van-tag v-if="user.isMerchant===false" text-color="#ffb9ca" round
+          <van-tag v-if="user.isMerchant===0" text-color="#ffb9ca" round
                    style="margin-right: 10px;background: #df3c5a">普通用户
           </van-tag>
-          <van-tag v-if="user.isMerchant===true" text-color="#ffb9ca" round
+          <van-tag v-if="user.isMerchant===1" text-color="#ffb9ca" round
                    style="margin-right: 10px;background: #df3c5a">淘商
           </van-tag>
           <van-tag text-color="#ffb9ca" round style="border-radius: 20px;background: #df3c5a">收货地址</van-tag>
@@ -36,6 +37,11 @@
     ></van-image>
     <van-button v-if="user.userId===''" type="default" text="立即登录" @click="jumpLogin"
                 style="width: 150px;color: cornflowerblue;position: absolute;top: 8%;left: 30%;border-radius: 20px"></van-button>
+  </div>
+  <div>
+    <van-button v-if="user.isMerchant===1" plain type="primary" round style=";position: absolute;right: 20px;top:90px">
+      添加淘品
+    </van-button>
   </div>
   <div v-if="user.userId!==''"
        style="width: 90%;height: 145px;background: white;position: absolute;left: 4.8%;top: 17%;border-radius: 20px">
@@ -67,7 +73,9 @@
 import {useRoute, useRouter} from "vue-router";
 import {getCurrentInstance, ref, watch} from "vue";
 import Tetris from "../Tetris/tetris.vue";
-
+import {useStore} from "vuex";
+import {key} from '../store'
+const store = useStore(key)
 
 /*调用axios*/
 const currentInstance = getCurrentInstance()
@@ -76,7 +84,7 @@ const {$http}: any = currentInstance?.appContext.config.globalProperties
 const route = useRoute();
 const router = useRouter();
 /*定义user对象*/
-const user = ref({nickName: '', userId: '', icon: '', isMerchant: false});
+const user = ref({nickName: '', userId: '', icon: '', isMerchant: 0});
 /*淘了个淘是否显示的判断标准*/
 const taoShow = ref(false);
 /*定义顶部css样式*/
@@ -125,14 +133,15 @@ const first = () => {
   // };
   $http.get('http://localhost:8082/user/me'
   ).then((res: any) => {
-    console.log("res===" + res.data)
+    console.log("res===" + res.data.data.userId)
     if (res.data.data === undefined) return
     else {
       user.value.userId = res.data.data.userId;
+      store.commit("changeUserId",res.data.data.userId)
       console.log(user.value.userId);
       user.value.icon = res.data.data.icon;
       user.value.nickName = res.data.data.nickName;
-      user.value.isMerchant = false;
+      user.value.isMerchant = res.data.data.isMerchant;
     }
   })
 }

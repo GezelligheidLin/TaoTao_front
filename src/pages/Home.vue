@@ -1,4 +1,5 @@
 <template>
+
   <van-nav-bar
       title="淘了个淘"
       fixed
@@ -31,6 +32,10 @@
             height="100%"
             :src="image.image"
             radius="5%"
+            @click="()=>{
+              $router.push('/Details')
+              $store.commit('changeHomeLunBoId',image.commodityId)
+            }"
         />
       </div>
     </van-swipe-item>
@@ -39,61 +44,91 @@
 
   <van-grid :border="false" :column-num="5" :gutter="0" square
             style="width: 90%;margin: 20px auto;--van-grid-item-content-background-color: transparent">
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=0
+    }">
       <van-image
           :src="goodsTypeData[0].url"
       />
       <span class="txt">{{ goodsTypeData[0].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=1
+    }">
       <van-image
           :src="goodsTypeData[1].url"
       />
       <span class="txt">{{ goodsTypeData[1].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=2
+    }">
       <van-image
           :src="goodsTypeData[2].url"
       />
       <span class="txt">{{ goodsTypeData[2].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=3
+    }">
       <van-image
           :src="goodsTypeData[3].url"
       />
       <span class="txt">{{ goodsTypeData[3].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=4
+    }">
       <van-image
           :src="goodsTypeData[4].url"
       />
       <span class="txt">{{ goodsTypeData[4].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=5
+    }">
       <van-image
           :src="goodsTypeData[5].url"
       />
       <span class="txt">{{ goodsTypeData[5].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=6
+    }">
       <van-image
           :src="goodsTypeData[6].url"
       />
       <span class="txt">{{ goodsTypeData[6].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=7
+    }">
       <van-image
           :src="goodsTypeData[7].url"
       />
       <span class="txt">{{ goodsTypeData[7].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=8
+    }">
       <van-image
           :src="goodsTypeData[8].url"
       />
       <span class="txt">{{ goodsTypeData[8].type }}</span>
     </van-grid-item>
-    <van-grid-item>
+    <van-grid-item @click="()=>{
+      $router.push('/Type')
+      $store.state.HomeTypeIndex=9
+    }">
       <van-image
           :src="goodsTypeData[9].url"
       />
@@ -117,6 +152,10 @@
             :src="boutique.image"
             width="100%"
             height="17em"
+            @click="()=>{
+              $router.push('/Details')
+              $store.state.HomeLunBoId = boutique.commodityId
+            }"
         />
       </van-swipe-item>
     </van-swipe>
@@ -140,6 +179,10 @@
             width="160"
             height="90"
             radius="10px"
+            @click="()=>{
+              $router.push('/Details')
+              $store.state.HomeLunBoId = prefectureData[0].commodityId
+            }"
         />
         <span class="txt">{{ prefectureData[0].commodityType }}</span>
       </van-grid-item>
@@ -149,6 +192,10 @@
             width="160"
             height="90"
             radius="10px"
+            @click="()=>{
+              $router.push('/Details')
+              $store.state.HomeLunBoId = prefectureData[1].commodityId
+            }"
         />
         <span class="txt">{{ prefectureData[1].commodityType }}</span>
       </van-grid-item>
@@ -158,6 +205,10 @@
             width="160"
             height="90"
             radius="10px"
+            @click="()=>{
+              $router.push('/Details')
+              $store.state.HomeLunBoId = prefectureData[2].commodityId
+            }"
         />
         <span class="txt">{{ prefectureData[2].commodityType }}</span>
       </van-grid-item>
@@ -167,6 +218,10 @@
             width="160"
             height="90"
             radius="10px"
+            @click="()=>{
+              $router.push('/Details')
+              $store.state.HomeLunBoId = prefectureData[3].commodityId
+            }"
         />
         <span class="txt">{{ prefectureData[3].commodityType }}</span>
       </van-grid-item>
@@ -183,10 +238,14 @@
               :src=GuessYouLike.image
               radius="20px"
               style="margin-top: 20px"
+              @click="()=>{
+              $router.push('/Details')
+              $store.state.HomeLunBoId = GuessYouLike.commodityId
+            }"
           />
           <div style="margin-top: 35px;margin-left: 10px;margin-right: 15px;">{{ GuessYouLike.commodityName }}</div>
           <div style="font-size: 12px;color: gray;margin-top: 2px;margin-left: 10px;margin-right: 15px;">
-            {{ GuessYouLike.cif }}
+            {{ GuessYouLike.description }}
           </div>
           <div style="font-size: 19px;color: red;margin-top: 10px;margin-left: 10px;margin-right: 15px;">
             ￥{{ GuessYouLike.price }}
@@ -220,17 +279,16 @@ const moodCount = ref(0);
 /*顶部滚动图片url*/
 const topImageData = reactive([
   {
-    id: '0', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg'
+    commodityId: '0', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg'
   },
   {
-    id: '1',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg'
+    commodityId: '1', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg'
   },
   {
-    id: '2', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg'
+    commodityId: '2', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg'
   },
   {
-    id: '3', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg'
+    commodityId: '3', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg'
   }
 ])
 /*商品类型数据*/
@@ -279,22 +337,22 @@ const goodsTypeData = reactive([
 /*精品商品数据*/
 const boutiqueData = reactive([
   {
-    id: '0',
+    commodityId: '0',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
     price: 30
   },
   {
-    id: '1',
+    commodityId: '1',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
     price: 40
   },
   {
-    id: '2',
+    commodityId: '2',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',
     price: 50
   },
   {
-    id: '3',
+    commodityId: '3',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',
     price: 60
   }
@@ -303,22 +361,22 @@ const boutiqueData = reactive([
 /*专区数据*/
 const prefectureData = reactive([
   {
-    id: '0',
+    commodityId: '0',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
     commodityType: '智慧办公'
   },
   {
-    id: '1',
+    commodityId: '1',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg',
     commodityType: '智能家居'
   },
   {
-    id: '2',
+    commodityId: '2',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/98721406_p0_master1200.jpg',
     commodityType: '华为手机'
   },
   {
-    id: '3',
+    commodityId: '3',
     image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99663718_p0_master1200.jpg',
     commodityType: '影音娱乐'
   }
@@ -326,31 +384,31 @@ const prefectureData = reactive([
 /*猜你喜欢数据*/
 const GuessYouLikeData = reactive([
   {
-    id: '0',
+    commodityId: '0',
     image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
     commodityName: '巴拉巴拉巴拉巴拉巴拉巴拉',
-    cif: '巴拉巴拉巴拉巴拉',
+    description: '巴拉巴拉巴拉巴拉',
     price: 9999
   },
   {
-    id: '1',
+    commodityId: '1',
     image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
     commodityName: '欧拉欧拉欧拉欧拉欧拉欧拉',
-    cif: '欧拉欧拉欧拉欧拉',
+    description: '欧拉欧拉欧拉欧拉',
     price: 8899
   },
   {
-    id: '2',
+    commodityId: '2',
     image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
     commodityName: '巴拉巴拉巴拉巴拉巴拉巴拉',
-    cif: '巴拉巴拉巴拉巴拉',
+    description: '巴拉巴拉巴拉巴拉',
     price: 9999
   },
   {
-    id: '3',
+    commodityId: '3',
     image: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
     commodityName: '欧拉欧拉欧拉欧拉欧拉欧拉',
-    cif: '欧拉欧拉欧拉欧拉',
+    description: '欧拉欧拉欧拉欧拉',
     price: 8899
   },
 ]);
@@ -374,7 +432,6 @@ const recommendPrice = ref(boutiqueData[0].price);
 /*滚动图片改变时的事件*/
 const onChange = (index: number) => {
   recommendPrice.value = boutiqueData[index].price;
-  //Toast('当前 Swipe 索引：' + (index+1));
 }
 
 /*axios渲染数据*/
@@ -382,22 +439,15 @@ const openHome = () => {
 
   /*顶部轮播数据请求 topImageData:[{goodsId:'',image:''}]*/
   $http.get('http://localhost:8082/home/carousel').then((res: any) => {
-    // for(let i=0;i<res.data.data.length;i++) {
-    //   topImageData[i].id = res.data.data[i].id;
-    //   topImageData[i].image = res.data.data[i].image;
-    // }
+
     topImageData.length = 0;
     res.data.data.forEach((i: any) => {
       topImageData.push(i)
     });
   });
-
   /*商品类型数据请求 goodsTypeData:[{image:'',typeName:''}]*/
-  $http.get('http://localhost:8082/goodsType/show').then((res: any) => {
-    // for(let i=0;i<res.data.data.length;i++) {
-    //   goodsTypeData[i].url = res.data.data[i].url;
-    //   goodsTypeData[i].type = res.data.data[i].type;
-    // }
+  $http.get('http://localhost:8082/goodsType/icon').then((res: any) => {
+
     goodsTypeData.length = 0;
     console.log(res.data)
     res.data.data.forEach((i: any) => {
@@ -407,11 +457,6 @@ const openHome = () => {
 
   /*精品推荐数据请求 boutiqueData:[{goodsId: '',image: '',price:0}]*/
   $http.get('http://localhost:8082/home/recommend').then((res: any) => {
-    // for(let i=0;i<res.data.data.length;i++) {
-    //   boutiqueData[i].goodsId = res.data.data[i].id;
-    //   boutiqueData[i].image = res.data.data[i].image;
-    //   boutiqueData[i].price = res.data.data[i].price;
-    // }
     boutiqueData.length = 0;
     res.data.data.forEach((i: any) => {
       boutiqueData.push(i)
@@ -420,11 +465,8 @@ const openHome = () => {
 
   /*专区数据请求 prefectureData:[{goodsId: '',image: '',typeName:''}]*/
   $http.get('http://localhost:8082/home/area').then((res: any) => {
-    // for(let i=0;i<res.data.data.length;i++) {
-    //   prefectureData[i].goodsId = res.data.data[i].id;
-    //   prefectureData[i].image = res.data.data[i].image;
-    //   prefectureData[i].typeName = res.data.data[i].commodityType;
-    // }
+    console.log(res.data)
+
     prefectureData.length = 0;
     res.data.data.forEach((i: any) => {
       prefectureData.push(i)
@@ -433,14 +475,6 @@ const openHome = () => {
 
   /*猜你喜欢数据请求 GuessYouLikeData:[{goodsId: '',image: '',goodsName: '',goodsIntroduction: '',price: 0}]*/
   $http.get('http://localhost:8082/home/like').then((res: any) => {
-    // for(let i=0;i<res.data.data.length;i++) {
-    //   GuessYouLikeData[i].goodsId = res.data.data[i].id;
-    //   GuessYouLikeData[i].image = res.data.data[i].image;
-    //   GuessYouLikeData[i].goodsName = res.data.data[i].commodityName;
-    //   GuessYouLikeData[i].goodsIntroduction = res.data.data[i].cif;
-    //   GuessYouLikeData[i].price = res.data.data[i].price;
-    // }
-
     GuessYouLikeData.length = 0;
     res.data.data.forEach((i: any) => {
       GuessYouLikeData.push(i)

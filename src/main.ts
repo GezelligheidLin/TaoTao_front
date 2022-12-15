@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from "./router";
 import axios from "axios";
 import Store, {key} from "./store"
+import { Notify } from 'vant';
 
 const app = createApp(App);
 /*定义全局axios变量$http*/
@@ -18,4 +19,4 @@ axios.interceptors.request.use((config: any) => {
     return config
 })
 
-app.use(Store,key).use(router).mount('#app');
+app.use(Notify).use(Store,key).use(router).mount('#app');

@@ -57,7 +57,7 @@ const exit = () => {
       sessionStorage.removeItem("token");//将token从session移除
       router.push('/mine');
     }
-    else Toast.fail('推出失败');
+    else Toast.fail('退出失败');
   })
 }
 /*跳转到updateUser*/
