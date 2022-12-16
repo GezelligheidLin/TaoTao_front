@@ -11,7 +11,8 @@
       (route.path!=='/orderCenter')&&
       (route.path!=='/typeMore')&&
       (route.path!=='/Details')&&
-      (route.path!=='/submitOrder')"
+      (route.path!=='/submitOrder')&&
+      (route.path!=='/addGoods')"
       v-model="active"
       @change="onChange"
       :placeholder="true"

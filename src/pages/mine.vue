@@ -39,7 +39,7 @@
                 style="width: 150px;color: cornflowerblue;position: absolute;top: 8%;left: 30%;border-radius: 20px"></van-button>
   </div>
   <div>
-    <van-button v-if="user.isMerchant===1" plain type="primary" round style=";position: absolute;right: 20px;top:90px">
+    <van-button v-if="user.isMerchant===1" plain type="primary" round @click="()=>{router.push('/addGoods')}" style=";position: absolute;right: 20px;top:90px">
       添加淘品
     </van-button>
   </div>

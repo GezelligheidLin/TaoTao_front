@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 4.5em">
+  <div style="height: 4.5em" @click="update">
     <van-icon
         size="30px"
         name="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/%E8%BF%94%E5%9B%9E.png"
@@ -15,7 +15,7 @@
     <van-uploader :deletable="false" preview-size="150" :after-read=fileList capture="camera" accept="image/*">
       <template #default>
         <van-image
-            :src=userDetails.profilePhoto
+            :src=userDetails.icon
             width="80"
             height="80"
             radius="100%"
@@ -26,13 +26,15 @@
   <div style="margin-top: 50px;background: transparent">
     <van-cell-group inset>
       <van-cell title="当前账号" :value=userDetails.userId size="large" style="margin-top: 20px"/>
-      <van-cell title="用户名" is-link :value="userDetails.username" size="large" @click="updateUserName"
+      <van-cell title="手机号" is-link :value="userDetails.phone" size="large" @click="showPhone=true"
+                style="margin-top: 20px"/>
+      <van-cell title="用户名" is-link :value="userDetails.nickName" size="large" @click="updateUserName"
                 style="margin-top: 20px"/>
       <van-popup v-model:show="showName" position="bottom">
         <van-form @submit="onSubmit" style="height: 120px">
           <van-cell-group inset>
             <van-field
-                v-model=userDetails.username
+                v-model=userDetails.nickName
                 label="新用户名"
                 name="新用户名"
                 placeholder="新用户名"
@@ -45,13 +47,31 @@
           </div>
         </van-form>
       </van-popup>
+
+      <van-popup v-model:show="showPhone" position="bottom">
+        <van-form @submit="onSubmit" style="height: 120px">
+          <van-cell-group inset>
+            <van-field
+                v-model=userDetails.phone
+                label="新手机号"
+                name="新手机号"
+                placeholder="新手机号"
+            />
+          </van-cell-group>
+          <div style="margin: 16px;margin-top: 20px">
+            <van-button round block type="primary" native-type="submit">
+              更换手机号
+            </van-button>
+          </div>
+        </van-form>
+      </van-popup>
+
       <van-cell title="密码" is-link :value="userDetails.password" size="large" @click="jumpUpdatePassword"
                 style="margin-top: 20px"/>
       <van-cell title="生日" is-link :value=userDetails.birthday size="large" @click="show = true"
                 style="margin-top: 20px"/>
       <van-calendar v-model:show="show" size="large" @confirm="onConfirm" style="margin-top: 20px"/>
-      <van-cell title="手机号" is-link :value="userDetails.phone" size="large" @click="jumpUpdatePhone"
-                style="margin-top: 20px"/>
+
       <van-cell title="当前地区" is-link :value=userDetails.address size="large" @click="chooseArea"
                 style="margin-top: 20px;margin-bottom: 20px"/>
       <van-popup v-model:show="showAddrPopup" position="bottom">
@@ -69,26 +89,32 @@
 <script setup lang="ts">
 /*引入路由*/
 import {useRoute, useRouter} from "vue-router";
-import {reactive, ref} from "vue";
+import {getCurrentInstance, reactive, ref, watch} from "vue";
 import {areaList} from '@vant/area-data';
-
+import {useStore} from "vuex";
+import {key} from '../store'
+const store = useStore(key)
+/*调用axios*/
+const currentInstance = getCurrentInstance()
+const {$http}: any = currentInstance?.appContext.config.globalProperties
 /*路由变量*/
 const route = useRoute();
 const router = useRouter();
 /*定义用户对象*/
 const userDetails = reactive({
   userId: '',
-  username: '',
+  nickName: '',
   password: '更改密码',
-  profilePhoto: '',
+  icon: '',
   isMerchant: false,
-  sex: '未知',
   birthday: '修改生日',
   phone: '修改手机号',
   address: '修改地区'
 })
 /*拿到路由传递的对象数据*/
-const user = reactive(JSON.parse(route.params.u + '')._value);
+// const user = reactive(JSON.parse(route.params.u + '')._value);
+
+let showPhone = ref(false);
 /*是否展示姓名修改弹窗*/
 let showName = ref(false);
 /*是否展示地区修改弹窗*/
@@ -98,13 +124,16 @@ const show = ref(false);
 /*点击修改用户名后的退出弹窗*/
 const onSubmit = () => {
   showName.value = false;
+  showPhone.value = false;
 }
 /*点击修改用户名弹出窗口修改用户名*/
 const updateUserName = () => {
   showName.value = true;
 }
+
+
 /*定义日期格式*/
-const formatDate = (date: any) => `${date.getMonth() + 1}/${date.getDate()}`;
+const formatDate = (date: any) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 /*选择完日期后的事件*/
 const onConfirm = (value: any) => {
   show.value = false;
@@ -125,12 +154,14 @@ const confArea = (data: any) => {
 }
 /*修改头像事件*/
 const fileList = (file: any) => {
-  userDetails.profilePhoto = file.content
+  userDetails.icon = file.content
   const forms = new FormData();
   forms.append("file", file.file);
+
 }
 /*跳转修改密码页面*/
 const jumpUpdatePassword = () => {
+  update()
   router.push({
     name: 'password',
     params: {password: userDetails.password, userId: userDetails.userId, u: route.params.u}
@@ -150,12 +181,24 @@ const jumpUpdatePhone = () => {
     params: {userId: userDetails.userId, userPhone: userDetails.phone, u: route.params.u}
   })
 }
+
+const update = () => {
+  $http.put("http://localhost:8082/user/update",userDetails).then((res:any)=>{
+    console.log(res.data)
+  })
+}
 /*渲染数据*/
 const openUpdateUser = () => {
-  userDetails.userId = user.userId;
-  userDetails.username = user.username;
-  userDetails.profilePhoto = user.profilePhoto;
-  userDetails.isMerchant = user.isMerchant;
+  $http.get("http://localhost:8082/user/info/"+store.state.userId).then((res:any)=>{
+    userDetails.userId = res.data.data.userId;
+    userDetails.nickName = res.data.data.nickName;
+    userDetails.icon = res.data.data.icon;
+    userDetails.isMerchant = res.data.data.isMerchant;
+    userDetails.address=res.data.data.address
+    userDetails.password=res.data.data.password
+    userDetails.birthday=res.data.data.birthday
+    userDetails.phone=res.data.data.phone
+  })
 
 }
 openUpdateUser();
