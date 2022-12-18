@@ -20,9 +20,9 @@
             <div style="display: flex;align-items: center;">{{ index + 1 }}</div>
             <van-grid-item>
               <van-image
-                  :src="item.merchantPhoto" radius="100%" width="50px" height="50px"/>
+                  :src="item.icon" radius="100%" width="50px" height="50px"/>
             </van-grid-item>
-            <div style="display: flex;align-items: center;">{{ item.merchantName }}</div>
+            <div style="display: flex;align-items: center;">{{ item.storeName }}</div>
             <div v-if="index<=2" style="position: absolute;right: 30px;top:50%;">
               <span style="font-weight:900;font-size: 16px">粉丝数:</span>
               <span style="font-weight:900;font-size: 22px;color: red">{{ item.fansCount }}</span>

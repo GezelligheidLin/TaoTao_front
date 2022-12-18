@@ -4,7 +4,7 @@ import router from "./router";
 import axios from "axios";
 import Store, {key} from "./store"
 import { Notify } from 'vant';
-
+import { Form, Field, CellGroup } from 'vant';
 const app = createApp(App);
 /*定义全局axios变量$http*/
 app.config.globalProperties.$http = axios
@@ -18,5 +18,7 @@ axios.interceptors.request.use((config: any) => {
     }
     return config
 })
-
+app.use(Form);
+app.use(Field);
+app.use(CellGroup);
 app.use(Notify).use(Store,key).use(router).mount('#app');

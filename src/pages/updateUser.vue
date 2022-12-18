@@ -28,16 +28,16 @@
       <van-cell title="当前账号" :value=userDetails.userId size="large" style="margin-top: 20px"/>
       <van-cell title="手机号" is-link :value="userDetails.phone" size="large" @click="showPhone=true"
                 style="margin-top: 20px"/>
-      <van-cell title="用户名" is-link :value="userDetails.nickName" size="large" @click="updateUserName"
+      <van-cell title="昵称" is-link :value="userDetails.nickName" size="large" @click="updateUserName"
                 style="margin-top: 20px"/>
       <van-popup v-model:show="showName" position="bottom">
         <van-form @submit="onSubmit" style="height: 120px">
           <van-cell-group inset>
             <van-field
                 v-model=userDetails.nickName
-                label="新用户名"
-                name="新用户名"
-                placeholder="新用户名"
+                label="新昵称"
+                name="新昵称"
+                placeholder="新昵称"
             />
           </van-cell-group>
           <div style="margin: 16px;margin-top: 20px">

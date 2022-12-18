@@ -266,6 +266,13 @@ const currentInstance = getCurrentInstance()
 const {$http}: any = currentInstance?.appContext.config.globalProperties
 /*顶部搜索框绑定的值*/
 const value = ref('');
+
+const search = () => {
+  $http.get('http://localhost:8082/seek/'+value.value).then((res:any)=>{
+    console.log(res.data)
+  })
+}
+
 /*心情标语*/
 const mood = ref([
   '恭喜你，发现了隐藏彩蛋喔，我喜欢你♥~♥',
@@ -422,7 +429,7 @@ const onClickRight = () => {
 }
 
 /*搜索之后的事件*/
-const onSearch = (val: object) => Toast(val);
+const onSearch = (val: object) => {search()};
 /*取消搜索的事件*/
 const onCancel = () => Toast('取消');
 /*顶部标签栏左部点击事件*/
