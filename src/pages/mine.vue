@@ -128,7 +128,7 @@ const first = () => {
   // user.value = {
   //   nickName: '竺九',
   //   userId: 'mkj2721183250',
-  //   icon: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+  //   icon: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
   //   isMerchant: false
   // };
   $http.get('http://localhost:8082/user/me'

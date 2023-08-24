@@ -64,13 +64,14 @@ let active = store.state.HomeTypeIndex;
 const value = ref('');
 
 const count = ref(0)
+const goodsImg = ref('https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/16754df6ffb5e8ed.jpg')
 
 const goodsType = reactive([
   {
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -109,14 +110,14 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'2',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
       },
       {
         commodity_id:'3',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -141,7 +142,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -173,7 +174,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -205,7 +206,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -237,7 +238,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -269,7 +270,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -301,7 +302,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -333,7 +334,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18
@@ -365,7 +366,7 @@ const goodsType = reactive([
     goods:[
       {
         commodity_id:'1',
-        image :'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+        image :'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
         price : 59,
         commodity_name : '秋冬2022新款渐变格子时尚披肩女外搭斗篷毛毯保暖流苏披肩男',
         data : 18

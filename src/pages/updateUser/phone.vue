@@ -2,7 +2,7 @@
   <div style="height: 4.5em">
     <van-icon
         size="30px"
-        name="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/%E8%BF%94%E5%9B%9E.png"
+        name="https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/back.png"
         @click="jumpUpdateUser"
         style="position: absolute;top:2%;left:5%"
     />

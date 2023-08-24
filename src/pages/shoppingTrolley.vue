@@ -73,7 +73,7 @@ const linPrice = ref('0')
 const commoditys = reactive([
   {
     commodityName: '小米',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    image: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
     description: '为发烧而生',
     commodityType: '手机',
     price: 2999.66,

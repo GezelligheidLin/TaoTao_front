@@ -43,12 +43,12 @@
   <div style="height: 230px;width: 95%;margin: auto;margin-top: 15px;background: white;border-radius: 20px">
     <van-image
       round
-      src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg"
+      src="https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png"
       width="50px"
       height="50px"
       style="margin: 20px"
     />
-    <span style="position: absolute;top: 60%;font-weight: 500">哈哈哈</span>
+    <span style="position: absolute;top: 60%;font-weight: 500">海绵宝宝胖揍派大星</span>
     <div style="display: inline-block;height: 20px">&emsp;&emsp;终于收到我需要的宝贝了，东西很好，价美物廉，谢谢掌柜的！说实在，这是我淘宝购物来让我最满意的一次购物。无论是掌柜的态度还是对物品，我都非常满意的。掌柜态度很专业热情，有问必答，回复也很快，我问了不少问题........</div>
   </div>
   <div style="height: 620px;width: 95%;margin: auto;margin-top: 15px;background: white;border-radius: 20px">

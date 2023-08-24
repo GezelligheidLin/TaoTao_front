@@ -169,7 +169,7 @@
         class="recommendTop"
         style="position: inherit">
       <template #left>
-        <span style="font-size: 15px;color: black;font-weight:900;" @click="">xx专区</span>
+        <span style="font-size: 15px;color: black;font-weight:900;" @click="">会员专区</span>
       </template>
     </van-nav-bar>
     <van-grid :column-num="2" :gutter="0" :border="false" style="margin-top: -16px;background: transparent">
@@ -286,7 +286,7 @@ const moodCount = ref(0);
 /*顶部滚动图片url*/
 const topImageData = reactive([
   {
-    commodityId: '0', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg'
+    commodityId: '0', image: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png'
   },
   {
     commodityId: '1', image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/102916544_p0_master1200.jpg'
@@ -301,7 +301,7 @@ const topImageData = reactive([
 /*商品类型数据*/
 const goodsTypeData = reactive([
   {
-    url: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    url: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
     type: '智慧办公'
   },
   {
@@ -321,7 +321,7 @@ const goodsTypeData = reactive([
     type: '运动健康'
   },
   {
-    url: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    url: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
     type: '鸿蒙智联'
   },
   {
@@ -345,7 +345,7 @@ const goodsTypeData = reactive([
 const boutiqueData = reactive([
   {
     commodityId: '0',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    image: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
     price: 30
   },
   {
@@ -369,7 +369,7 @@ const boutiqueData = reactive([
 const prefectureData = reactive([
   {
     commodityId: '0',
-    image: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/14753/99895443_p0_master1200.jpg',
+    image: 'https://wxu-school.oss-cn-shanghai.aliyuncs.com/wxu/user.png',
     commodityType: '智慧办公'
   },
   {
